@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Play, Pause, SkipBack, SkipForward, Scissors, Monitor, Layers, Volume2, Maximize, MousePointer2 } from "lucide-react";
 import { NoiseTexture } from "@/components/ui/NoiseTexture";
+import CallButn from "@/components/ui/CallButn";
 
 export default function Hero({ onScrollToSection }) {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -57,26 +58,25 @@ export default function Hero({ onScrollToSection }) {
         >
           <h1 className="text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold leading-[1.05] tracking-tight text-white mb-6 max-w-4xl mx-auto">
             Crafting Cinematic <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400">Masterpieces.</span>
+            <span className="text-gradient-green">Masterpieces.</span>
           </h1>
 
+ 
           <p className="text-white/60 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed mb-10 font-light">
             We transform raw footage into compelling narratives. Expert video editing, color grading, and visual effects that command attention.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <button
-              onClick={() => onScrollToSection?.("portfolio")}
-              className="px-8 py-4 bg-gradient-to-r from-amber-600 to-yellow-600 text-white rounded-xl font-bold text-[15px] hover:opacity-90 transition-all shadow-[0_10px_30px_rgba(245, 158, 11,0.3)] hover:shadow-[0_15px_40px_rgba(245, 158, 11,0.4)] hover:-translate-y-1 flex items-center gap-2"
-            >
-              <Play className="w-4 h-4 fill-current" /> View Showreel
+            <div className="uiverse-glass-wrap w-full sm:w-auto flex justify-center">
+            <div className="button-shadow" />
+            <button className="glass-btn w-full sm:w-auto md:px-8 md:py-5">
+              <span className="label-span justify-center inline-flex tracking-[0.15rem]">
+                View Showreel
+                <Play className="w-3.5 h-3.5 fill-current text-[var(--color-lime-light)] drop-shadow-[0_0_3px_rgba(255,165,0,0.4)]" />
+              </span>
             </button>
-            <button
-              onClick={() => onScrollToSection?.("contact")}
-              className="px-8 py-4 bg-white/5 text-white border border-white/10 backdrop-blur-md rounded-xl font-bold text-[15px] hover:bg-white/10 transition-all hover:-translate-y-1"
-            >
-              Book a Consultation
-            </button>
+          </div>
+           <CallButn/>
           </div>
         </motion.div>
 
