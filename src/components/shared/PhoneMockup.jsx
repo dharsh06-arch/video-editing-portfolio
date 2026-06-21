@@ -47,6 +47,9 @@ export default function PhoneMockup({
 
   // Auto-cycle video index every 6 seconds
   useEffect(() => {
+    // Only auto-cycle if there are multiple videos
+    if (playlist.length <= 1) return;
+
     const timer = setInterval(() => {
       setIsLoading(true);
       // Trigger a fake loading buffer transition
@@ -86,7 +89,7 @@ export default function PhoneMockup({
           return (
             <motion.div
               key={idx}
-              className={`absolute w-[220px] aspect-[9/16] rounded-2xl overflow-hidden glass-panel border border-lime/20 shadow-2xl opacity-40 ${rotation}`}
+              className={`absolute w-[220px] aspect-[9/16] rounded-md overflow-hidden glass-panel shadow-2xl opacity-40 ${rotation}`}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 0.4, y: 0 }}
               transition={{ duration: 1, delay: 0.2 * idx }}
@@ -108,10 +111,10 @@ export default function PhoneMockup({
 
       {/* Main iPhone container with floating animation */}
       <motion.div
-        className="relative z-10 w-full max-w-[310px] sm:max-w-[330px] rounded-[52px] bg-black p-3.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),_0_0_50px_rgba(186,243,94,0.18)] border-[5px] border-surface/75 hover:border-lime/30 transition-colors duration-500"
-        animate={{
-          y: [-12, 12, -12],
-        }}
+        className="relative z-10 w-full max-w-[310px] sm:max-w-[330px] rounded-[52px] bg-black p-3.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),_0_0_50px_rgba(245, 158, 11,0.18)] transition-colors duration-500"
+        // animate={{
+        //   y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : [-12, 12, -12],
+        // }}
         transition={{
           duration: 6,
           repeat: Infinity,
@@ -133,18 +136,24 @@ export default function PhoneMockup({
           </div>
 
           {/* Screen Side Reflections */}
-          <div className="absolute inset-0 pointer-events-none z-40 bg-gradient-to-tr from-transparent via-white/5 to-transparent mix-blend-overlay" />
+          {/* <div className="absolute inset-0 pointer-events-none z-40 bg-gradient-to-tr from-transparent via-white/5 to-transparent mix-blend-overlay" /> */}
 
           {/* Video Player */}
           <div className="absolute inset-0 w-full h-full bg-neutral-950" onClick={togglePlay}>
             <video
               key={currentIdx}
-              ref={videoRef}
+              ref={(el) => {
+                videoRef.current = el;
+                if (el && isPlaying) {
+                  el.play().catch(e => console.log("Autoplay prevented:", e));
+                }
+              }}
               src={playlist[currentIdx]}
               loop
               muted={isMuted}
               playsInline
               autoPlay
+              crossOrigin="anonymous"
               className="w-full h-full object-cover cursor-pointer"
             />
           </div>
@@ -174,8 +183,8 @@ export default function PhoneMockup({
             </div>
           )}
 
-          {/* Reels UI Overlay */}
-          <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-end p-4 bg-gradient-to-t from-black/85 via-transparent to-black/30">
+          {/* Reels UI Overlay - Gradient Removed */}
+          <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-end p-4">
             
             {/* Top Sound Toggle */}
             <div className="absolute top-16 right-4 pointer-events-auto">
@@ -212,7 +221,7 @@ export default function PhoneMockup({
             </div>
 
             {/* Left Side Details Panel */}
-            <div className="w-[80%] text-left select-none mb-4">
+            {/* <div className="w-[80%] bg-linear-to-t from-transparent to-black text-left select-none mb-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-full border border-lime bg-surface overflow-hidden shrink-0 flex items-center justify-center text-[10px] font-bold text-white">
                   V
@@ -225,17 +234,16 @@ export default function PhoneMockup({
               </p>
               <div className="flex items-center gap-1.5 text-[9px] text-lime font-semibold uppercase tracking-wider">
                 <Music className="w-3 h-3 animate-spin" style={{ animationDuration: '6s' }} />
-                <span>Original Audio • Cinematic Mix</span>
               </div>
-            </div>
+            </div> */}
 
             {/* Bottom Progress Bar */}
-            <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden mb-1">
+            {/* <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden mb-1">
               <div
                 className="h-full bg-gradient-to-r from-surface to-lime transition-all duration-100"
                 style={{ width: `${progress}%` }}
               />
-            </div>
+            </div> */}
 
           </div>
 

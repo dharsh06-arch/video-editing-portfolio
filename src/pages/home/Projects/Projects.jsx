@@ -5,9 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Play, Eye } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { projects } from "@/data/projects";
+import { NoiseTexture } from "@/components/ui/NoiseTexture";
 
 // Local helper component for each Coverflow Card to manage dynamic video playing state
-function CoverflowCard({ project, isActive, onClick }) {
+function CoverflowCard({ project, isActive, distance, onClick }) {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -33,14 +34,13 @@ function CoverflowCard({ project, isActive, onClick }) {
   return (
     <div
       onClick={onClick}
-      className={`relative w-[280px] sm:w-[320px] h-[400px] sm:h-[450px] rounded-[32px] overflow-hidden border transition-all duration-500 bg-surface/40 flex flex-col justify-end p-6 select-none cursor-pointer ${
-        isActive 
-          ? "border-[#baf35e] shadow-[0_0_30px_rgba(186,243,94,0.15)]" 
-          : "border-white/10 hover:border-white/20"
-      }`}
+      className={`relative w-[280px] sm:w-[320px] h-[400px] sm:h-[450px] rounded-[10px] overflow-hidden border transition-all duration-500  flex flex-col justify-end p-6 select-none cursor-pointer ${isActive
+          ? "border-amber-500 shadow-[0_0_30px_rgba(245, 158, 11,0.25)]"
+          : "border-white/10 hover:border-amber-500/30"
+        }`}
     >
       {/* Media Content */}
-      <div className="absolute inset-0 z-0 select-none pointer-events-none bg-neutral-950">
+      <div className="absolute inset-0 z-0 select-none pointer-events-none bg-neutral-900">
         {/* Video Preview - Paused poster frame when inactive, full playback when active */}
         {project.videoUrl && (
           <video
@@ -50,15 +50,21 @@ function CoverflowCard({ project, isActive, onClick }) {
             muted
             playsInline
             preload="auto"
-            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
-              isActive ? "opacity-100 filter brightness-[0.65]" : "opacity-45 filter brightness-[0.35]"
-            }`}
+            className="absolute inset-0 w-full h-full object-cover"
           />
         )}
+        {/* Blur & Darken Overlay for inactive cards */}
+        <div 
+          className="absolute inset-0 transition-all duration-700 pointer-events-none z-10"
+          style={{
+            backgroundColor: isActive ? 'transparent' : 'rgba(0, 0, 0, 0.45)',
+            backdropFilter: isActive ? 'blur(0px)' : `blur(${distance === 1 ? 2 : distance >= 2 ? 3 : 0}px)`
+          }}
+        />
       </div>
 
       {/* Fade overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent z-10" />
+      {/* <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent z-10" /> */}
 
       {/* Top Right Play indicator */}
       {!isActive && (
@@ -69,11 +75,10 @@ function CoverflowCard({ project, isActive, onClick }) {
 
       {/* Card Details (Text and Stats) */}
       <div className="relative z-20 text-left space-y-2 mt-auto">
-        
+
         {/* Stats text */}
-        <div className={`text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-1.5 transition-colors duration-500 ${
-          isActive ? "text-[#baf35e]" : "text-[#8e938f]"
-        }`}>
+        <div className={`text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-1.5 transition-colors duration-500 ${isActive ? "text-amber-400" : "text-[#8e938f]"
+          }`}>
           <Eye className="w-3.5 h-3.5 shrink-0" />
           <span>{project.stats}</span>
         </div>
@@ -133,37 +138,59 @@ export default function Projects() {
   };
 
   return (
-    <section 
-      id="projects" 
-      className="relative z-20 py-24 px-6 md:px-12 lg:px-24 bg-black border-t border-lime/10 overflow-hidden"
+    <section
+      id="projects"
+      className="relative z-20 py-24 px-6 md:px-12 lg:px-24 bg-black border-t border-amber-500/10 overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      
-      {/* Background Aura */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[rgba(186,243,94,0.03)] rounded-full blur-[160px] pointer-events-none z-0" />
+
+      <div className="absolute inset-0 bg-grid-pattern  pointer-events-none z-0" />
+
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div
+            className="absolute inset-0 [background-size:50px_50px] [background-image:linear-gradient(to_right,rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.12)_1px,transparent_1px)]"
+          />
+          {/* Radial gradient mask for faded edge look */}
+          <div className="absolute inset-0 bg-[#050806] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+        </div>
+
+      <NoiseTexture
+        frequency={0.65}
+        octaves={5}
+        slope={0.75}
+        noiseOpacity={0.35}
+        className=""
+      />
+
+      {/* Top Lamp Light */}
+      <div className="absolute -top-[150px] left-1/2 -translate-x-1/2 w-[800px] max-w-full h-[300px] bg-amber-600/20 blur-[120px] pointer-events-none z-0 rounded-full" />
+
+      {/* Center Aura */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] max-w-full h-[700px] bg-amber-600/10 rounded-full blur-[160px] pointer-events-none z-0" />
+
+      {/* Bottom Lamp Light */}
+      <div className="absolute -bottom-[150px] left-1/2 -translate-x-1/2 w-[800px] max-w-full h-[300px] bg-amber-600/20 blur-[120px] pointer-events-none z-0 rounded-full" />
 
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
-        
+
         {/* Header Block */}
         <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
-          <SectionTitle 
-            tag="[MY PROJECTS]"
-            title="Featured"
-            highlightTitle="Project Tracks"
-          />
+          <h1 className="text-4xl md:text-5xl text-white leading-[1.05] tracking-tight">
+            Featured Project Tracks
+          </h1>
 
           {/* Navigation Controls */}
           <div className="flex items-center gap-3">
             <button
               onClick={handlePrev}
-              className="p-3 rounded-full border border-white/10 bg-surface/20 text-slate-300 hover:border-[#baf35e] hover:text-[#baf35e] transition-colors duration-300 cursor-pointer shadow-lg"
+              className="p-3 rounded-full border border-white/10 bg-white/5 text-slate-300 hover:border-amber-400 hover:text-amber-400 hover:bg-white/10 transition-colors duration-300 cursor-pointer shadow-lg"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNext}
-              className="p-3 rounded-full border border-white/10 bg-surface/20 text-slate-300 hover:border-[#baf35e] hover:text-[#baf35e] transition-colors duration-300 cursor-pointer shadow-lg"
+              className="p-3 rounded-full border border-white/10 bg-white/5 text-slate-300 hover:border-amber-400 hover:text-amber-400 hover:bg-white/10 transition-colors duration-300 cursor-pointer shadow-lg"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -173,25 +200,29 @@ export default function Projects() {
         {/* 3D Coverflow Container */}
         <div className="relative h-[480px] sm:h-[530px] w-full flex items-center justify-center overflow-visible py-8 perspective-[1200px]">
           <div className="relative w-full max-w-[900px] h-full flex items-center justify-center overflow-visible transform-style-3d">
-            
+
             {projects.map((proj, idx) => {
               const length = projects.length;
-              
+
               // Calculate wrapped distance in loop
               let diff = idx - activeIndex;
               if (diff < -length / 2) diff += length;
               if (diff > length / 2) diff -= length;
-              
+
               const isCenter = diff === 0;
 
-              // Calculate position with responsive scaling
+              // Calculate position using strict CoverFlow math for perfect stacking
               const getXPosition = () => {
-                const baseX = diff * 240;
-                // On smaller screens, reduce the distance
-                if (typeof window !== 'undefined' && window.innerWidth < 640) {
-                  return diff * 160;
-                }
-                return baseX;
+                const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+                if (diff === 0) return 0;
+
+                // Distance of the first side card from center
+                const baseOffset = isMobile ? 140 : 280;
+                // Distance between stacked side cards
+                const stackOffset = isMobile ? 60 : 100;
+
+                const x = baseOffset + (Math.abs(diff) - 1) * stackOffset;
+                return diff > 0 ? x : -x;
               };
 
               return (
@@ -203,10 +234,10 @@ export default function Projects() {
                   }}
                   animate={{
                     x: getXPosition(),
-                    scale: isCenter ? 1.05 : 0.8,
-                    rotateY: isCenter ? 0 : diff < 0 ? 38 : -38,
-                    z: isCenter ? 120 : -160,
-                    opacity: isCenter ? 1 : 0.45
+                    scale: diff === 0 ? 1.05 : Math.max(0.65, 1.0 - Math.abs(diff) * 0.15),
+                    rotateY: 0,
+                    z: diff === 0 ? 150 : -Math.abs(diff) * 120,
+                    opacity: 1
                   }}
                   transition={{
                     type: "spring",
@@ -217,6 +248,7 @@ export default function Projects() {
                   <CoverflowCard 
                     project={proj} 
                     isActive={isCenter} 
+                    distance={Math.abs(diff)}
                     onClick={() => setActiveIndex(idx)}
                   />
                 </motion.div>
@@ -227,19 +259,18 @@ export default function Projects() {
         </div>
 
         {/* Dot Indicators */}
-        <div className="flex justify-center items-center gap-2.5">
+        {/* <div className="flex justify-center items-center gap-2.5">
           {projects.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActiveIndex(idx)}
-              className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${
-                activeIndex === idx 
-                  ? "w-8 bg-[#baf35e]" 
+              className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${activeIndex === idx
+                  ? "w-8 bg-amber-500"
                   : "w-2.5 bg-white/20 hover:bg-white/40"
-              }`}
+                }`}
             />
           ))}
-        </div>
+        </div> */}
 
       </div>
     </section>

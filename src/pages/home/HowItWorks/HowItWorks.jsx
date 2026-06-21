@@ -1,174 +1,135 @@
 "use client";
 
+import { NoiseTexture } from "@/components/ui/NoiseTexture";
 import { motion } from "framer-motion";
-import { Layers, Target, BarChart3, TrendingUp } from "lucide-react";
 
-// SectionTitle component definition
-const SectionTitle = ({ tag, title, highlightTitle }) => (
-  <div className="text-center space-y-3 mb-16">
-    <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#baf35e] block">
-      {tag}
-    </span>
-    <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.1]">
-      {title}
-    </h2>
-    <div className="flex items-center justify-center gap-3 mt-2">
-      <div className="w-12 h-0.5 bg-[#baf35e]" />
-      <span className="text-sm font-bold uppercase tracking-widest text-white/60">
-        {highlightTitle}
-      </span>
-      <div className="w-12 h-0.5 bg-[#baf35e]" />
-    </div>
-  </div>
-);
-
-const frameworkSteps = [
+const workflowSteps = [
   {
     number: "01",
-    icon: <Layers className="w-5 h-5 text-[#baf35e]" />,
-    title: "Foundation",
-    description: "Tracking, creatives, audiences & offer clarity.",
+    title: "Discovery call",
+    description: "I learn about your brand, goals, and content needs to make sure we're the perfect fit.",
+    image: "/workflow_discovery_call.png",
   },
   {
     number: "02",
-    icon: <Target className="w-5 h-5 text-[#baf35e]" />,
-    title: "Validation",
-    description: "Prove what converts before scaling.",
+    title: "Client Onboarding",
+    description: "I set up your workflow, gather your assets, and align on style preferences and deadlines.",
+    image: "/workflow_client_onboarding.png",
   },
   {
     number: "03",
-    icon: <BarChart3 className="w-5 h-5 text-[#baf35e]" />,
-    title: "Optimization",
-    description: "Refine, cut waste, and improve roads.",
+    title: "Editing & Sound Design",
+    description: "Your raw footage is transformed into a high-retention video with precise pacing and premium foley.",
+    image: "/workflow_editing_sound.png",
   },
   {
     number: "04",
-    icon: <TrendingUp className="w-5 h-5 text-[#baf35e]" />,
-    title: "Scale",
-    description: "Increase budget only on winners.",
+    title: "Review & Delivery",
+    description: "We go through necessary revisions, ensuring the final asset exceeds your expectations before final handover.",
+    image: "/workflow_review_delivery.png",
   }
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative z-20 py-24 px-6 md:px-12 lg:px-24 bg-black border-t border-[rgba(186,243,94,0.1)] overflow-hidden">
+    <section id="how-it-works" className="relative z-20 py-24 px-6 md:px-12 lg:px-24 bg-[#0a0510] overflow-hidden">
 
-      {/* Grid Pattern Background */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(186, 243, 94, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(186, 243, 94, 0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px',
-          backgroundPosition: '-1px -1px'
-        }}
+      <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
+
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div
+          className="absolute inset-0 [background-size:50px_50px] [background-image:linear-gradient(to_right,rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.12)_1px,transparent_1px)]"
+        />
+        {/* Radial gradient mask for faded edge look */}
+        <div className="absolute inset-0 bg-[#050806] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      </div>
+
+      <NoiseTexture
+        frequency={0.65}
+        octaves={5}
+        slope={0.75}
+        noiseOpacity={0.35}
+        className=""
       />
 
-      {/* Large radial gradient glow centered behind the main object. */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-centered-glow rounded-full blur-[150px] pointer-events-none z-0" />
-
-      {/* Ambient Light Beams */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[rgba(186,243,94,0.06)] rounded-full blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[500px] h-[500px] bg-[rgba(139,92,246,0.06)] rounded-full blur-[120px] pointer-events-none z-0" />
-
-      <div className="max-w-6xl mx-auto relative z-10">
-
-        {/* Header Block - Exact match to image */}
-        <SectionTitle
-          tag="[WORKFLOW]"
-          title="HOW IT WORKS"
-          highlightTitle="PROCESS"
+      {/* Background Ambience */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Subtle Grid */}
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}
         />
+        {/* Ambient Purple Glows */}
+        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-amber-600/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[10%] left-[20%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px]" />
+      </div>
 
-        {/* Roadmap Layout */}
-        <div className="relative">
+      <div className="max-w-6xl mx-auto relative z-10 flex flex-col items-center">
 
-          {/* Timeline Path (SVG remains background) */}
-          <div className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0">
-            <svg width="100%" height="100%" viewBox="0 0 1000 800" fill="none" preserveAspectRatio="none" className="overflow-visible">
-              <defs>
-                <linearGradient id="roadmapGlow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#baf35e" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#baf35e" stopOpacity="0.8" />
-                </linearGradient>
-                <filter id="roadmapShadow">
-                  <feGaussianBlur stdDeviation="6" result="coloredBlur" />
-                  <feMerge>
-                    <feMergeNode in="coloredBlur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-
-              <path
-                d="M 500,20 C 150,100 150,200 500,250 C 850,300 850,400 500,450 C 150,500 150,600 500,700"
-                stroke="url(#roadmapGlow)"
-                strokeWidth="3"
-                strokeDasharray="8 10"
-                filter="url(#roadmapShadow)"
-                opacity="0.4"
-              />
-
-              <circle cx="500" cy="20" r="6" fill="#baf35e" opacity="0.8" />
-              <circle cx="500" cy="250" r="6" fill="#baf35e" opacity="0.8" />
-              <circle cx="500" cy="450" r="6" fill="#baf35e" opacity="0.8" />
-              <circle cx="500" cy="700" r="6" fill="#baf35e" opacity="0.8" />
-            </svg>
+        {/* Header Block */}
+        <div className="text-center space-y-5 mb-24 flex flex-col items-center">
+          <div className="inline-flex items-center px-5 py-1.5 rounded-full bg-white/80 text-black text-sm font-semibold tracking-wide">
+            How it works
           </div>
-
-          {/* Steps */}
-          <div className="space-y-20 md:space-y-28 relative z-10 flex flex-col items-center">
-            {frameworkSteps.map((step, idx) => {
-              return (
-                <div
-                  key={idx}
-                  className="flex flex-col items-center max-w-2xl w-full"
-                >
-                  {/* Content Block */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, delay: idx * 0.1 }}
-                    className="
-                      p-6 rounded-2xl bg-white/[0.03] border border-white/5 
-                      hover:border-[#baf35e]/30 transition-all duration-300 group
-                      w-full text-center
-                    "
-                  >
-                    {/* Step Number */}
-                    <div className="text-4xl font-black text-white/5 group-hover:text-white/10 transition-colors duration-300">
-                      {step.number}
-                    </div>
-
-                    {/* Icon + Title */}
-                    <div className="flex items-center gap-3 justify-center mt-2">
-                      <div className="p-2 rounded-lg bg-[#baf35e]/10 border border-[#baf35e]/20 flex-shrink-0">
-                        {step.icon}
-                      </div>
-                      <h3 className="text-xl font-bold text-white">
-                        {step.title}
-                      </h3>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-sm text-white/60 leading-relaxed mt-2 text-center">
-                      {step.description}
-                    </p>
-                  </motion.div>
-                </div>
-              );
-            })}
-          </div>
-
+          <h2 className="text-5xl md:text-6xl font-extrabold text-white tracking-tight">
+            My Workflow
+          </h2>
+          <p className="text-lg text-white/70 max-w-lg mx-auto leading-relaxed">
+            From first contact to final delivery, here's exactly how I handle everything.
+          </p>
         </div>
 
-        {/* Bottom Decorative Line */}
-        <div className="flex justify-center mt-16">
-          <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#baf35e]/30 to-transparent" />
+        {/* Workflow Steps */}
+        <div className="space-y-16 w-full flex flex-col items-center">
+          {workflowSteps.map((step, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-[900px] h-auto md:h-[320px] bg-[#030105] rounded-xl overflow-hidden flex flex-col md:flex-row shadow-[0_0_30px_rgba(0,0,0,0.8)] border border-white/5"
+            >
+              {/* Text Side (Left) */}
+              <div className="w-full md:w-[55%] p-8 md:p-12 flex flex-col justify-center relative z-20">
+                <h3 className="text-3xl font-bold text-white mb-5 tracking-tight">
+                  {step.title}
+                </h3>
+
+                {/* Fading Separator */}
+                <div className="w-full h-px bg-gradient-to-r from-white/20 to-transparent mb-6" />
+
+                <p className="text-white/70 text-lg leading-relaxed">
+                  {step.description}
+                </p>
+
+                {/* Big Number watermark */}
+                <div className="absolute bottom-[-10px] left-6 text-[140px] font-black text-amber-600/20 leading-none select-none pointer-events-none">
+                  {step.number}
+                </div>
+              </div>
+
+              {/* Image Side (Right) */}
+              <div className="w-full md:w-[45%] h-[250px] md:h-full relative">
+                {/* Blend gradient on desktop */}
+                <div className="hidden md:block absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#030105] to-transparent z-10" />
+                {/* Blend gradient on mobile */}
+                <div className="block md:hidden absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#030105] to-transparent z-10" />
+
+                <img
+                  src={step.image}
+                  alt={step.title}
+                  className="w-full h-full object-cover opacity-80"
+                />
+              </div>
+            </motion.div>
+          ))}
         </div>
 
       </div>

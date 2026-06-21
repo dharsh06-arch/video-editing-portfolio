@@ -10,10 +10,10 @@ export default function Button({
   glowing = false,
   icon: Icon = null,
   type = "button",
-  bgColor = "",      // Tailwind class (e.g. 'bg-purple-600') or raw hex color (e.g. '#8a5cff')
+  bgColor = "",      // Tailwind class (e.g. 'bg-amber-600') or raw hex color (e.g. '#8a5cff')
   textColor = "",    // Tailwind class (e.g. 'text-white') or raw hex color (e.g. '#fff')
   borderColor = "",  // Tailwind class or raw hex
-  glowColor = "#baf35e" // Glow color value
+  glowColor = "#f59e0b" // Glow color value
 }) {
   const buttonRef = useRef(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
@@ -35,15 +35,15 @@ export default function Button({
 
   const bgStyle = bgColor
     ? (isTailwindBg ? bgColor : "")
-    : (primary ? "bg-[#baf35e]" : "hover:bg-[#baf35e]/10");
+    : (primary ? "bg-[#f59e0b]" : "hover:bg-[#f59e0b]/10");
 
   const textStyle = textColor
     ? (isTailwindText ? textColor : "")
-    : (primary ? "text-black" : "text-[#baf35e]");
+    : (primary ? "text-black" : "text-[#f59e0b]");
 
   const borderStyle = borderColor
     ? (isTailwindBorder ? borderColor : "border")
-    : (primary ? "" : "border border-[#baf35e]");
+    : (primary ? "" : "border border-[#f59e0b]");
 
   // Inline custom variables context
   const customVariables = {

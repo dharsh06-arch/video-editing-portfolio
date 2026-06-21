@@ -1,166 +1,104 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { 
-  Home, 
-  User, 
-  Briefcase, 
-  FolderGit2, 
-  PhoneCall,
-  HelpCircle,
-  MessageSquare
-} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Aperture, Menu, X } from "lucide-react";
 
-export default function Navbar({
-  onScrollToSection,
-  activeSection = "home",
-}) {
-  const [isHidden, setIsHidden] = useState(false);
-
-  // Monitor scroll behavior to hide/show navbar dynamically
-  const { scrollY } = useScroll();
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    // Hide navbar when scrolling down past 120px, reveal when scrolling up
-    if (latest > previous && latest > 120) {
-      setIsHidden(true);
-    } else {
-      setIsHidden(false);
-    }
-  });
+export default function Navbar({ onScrollToSection, activeSection = "home" }) {
+  const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "about", label: "About", icon: User },
-    { id: "services", label: "Services", icon: Briefcase },
-    { id: "projects", label: "Projects", icon: FolderGit2 },
-    { id: "how-it-works", label: "How It Works", icon: HelpCircle },
-    { id: "testimonials", label: "Testimonials", icon: MessageSquare },
+    { id: "projects", label: "Projects" },
+    { id: "about", label: "About" },
+    { id: "services", label: "Services" },
+    { id: "testimonials", label: "Reviews" },
+    { id: "contact", label: "Contact" },
   ];
 
   const handleNavigation = (id) => {
-    if (id === "home") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-      return;
+    if (onScrollToSection) {
+      onScrollToSection(id);
     }
-    onScrollToSection(id);
+    setIsOpen(false);
   };
 
   return (
-    <motion.div 
-      variants={{
-        visible: { y: 0, opacity: 1 },
-        hidden: { y: -100, opacity: 0 },
-      }}
-      animate={isHidden ? "hidden" : "visible"}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4"
-    >
-      <motion.nav
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="
-          flex items-center gap-1
-          glass-panel-dark
-          rounded-full
-          p-2
-          shadow-[0_20px_50px_rgba(0,0,0,0.6)]
-          backdrop-blur-md
-        "
-      >
-        {navItems.map((item) => {
-          const isActive = activeSection === item.id;
-          const Icon = item.icon;
+    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 w-full">
+      {/* Desktop Navbar */}
+      <nav className="w-full max-w-6xl relative rounded-md bg-linear-to-r from-white/90 via-purple-200/90 to-gray-100/80 border border-white/40 flex items-center justify-between px-6 py-3">
 
-          return (
+        {/* Logo */}
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavigation("home")}>
+          <Aperture className="w-6 h-6 text-[#1e1040]" />
+          <span className="font-extrabold text-[#1e1040] text-lg tracking-tight">Vickey freelance</span>
+        </div>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-6">
+          {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => handleNavigation(item.id)}
-              className={`
-                relative
-                flex items-center gap-2
-                px-4
-                py-2.5
-                rounded-full
-                text-xs
-                font-bold
-                uppercase
-                tracking-[0.14em]
-                transition-colors
-                duration-300
-                cursor-pointer
-                outline-none
-                ${
-                  isActive
-                    ? "text-white"
-                    : "text-[var(--color-grey)] hover:text-white"
-                }
-              `}
+              className={`text-[#1e1040] font-medium text-sm hover:text-purple-700 transition-colors ${activeSection === item.id ? "text-purple-800 font-bold" : ""
+                }`}
             >
-              {/* Animated active pill tracker */}
-              {isActive && (
-                <motion.div
-                  layoutId="activeNavPill"
-                  transition={{
-                    type: "spring",
-                    stiffness: 380,
-                    damping: 30,
-                  }}
-                  className="
-                    absolute
-                    inset-0
-                    rounded-full
-                    bg-[rgba(5,8,6,0.8)]
-                    border
-                    border-[rgba(186,243,94,0.12)]
-                    shadow-[inset_0_2px_6px_rgba(0,0,0,0.8)]
-                  "
-                />
-              )}
-
-              {/* Dynamic Icon */}
-              <Icon className={`w-3.5 h-3.5 relative z-10 transition-transform duration-300 ${isActive ? "scale-110 text-white" : ""}`} />
-
-              <span className="relative z-10 hidden sm:inline">
-                {item.label}
-              </span>
+              {item.label}
             </button>
-          );
-        })}
+          ))}
+        </div>
 
-        {/* Divider */}
-        <div className="mx-2 h-5 w-px bg-[rgba(186,243,94,0.12)]" />
+        {/* CTA Button */}
+        <div className="hidden md:block">
+          <button
+            onClick={() => handleNavigation("contact")}
+            className="px-6 py-2.5 rounded-full bg-white text-[#1e1040] font-medium text-sm border-2 border-amber-600/80 shadow-[0_0_15px_rgba(147,51,234,0.2)] hover:shadow-[0_0_25px_rgba(147,51,234,0.4)] transition-all duration-300"
+          >
+            Book a Call
+          </button>
+        </div>
 
-        {/* Premium CTA */}
-        <button
-          onClick={() => onScrollToSection("contact")}
-          className="premium-call-btn"
-        >
-          <div className="premium-call-blob" />
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden flex items-center">
+          <button onClick={() => setIsOpen(!isOpen)} className="text-[#1e1040] p-1 focus:outline-none">
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </nav>
 
-          <div className="premium-call-inner">
-            <span className="flex items-center gap-2">
-              <span className="hidden md:inline">Book a Call</span>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-[80px] left-4 right-4 bg-white/95 backdrop-blur-xl rounded-md shadow-2xl border border-purple-100/50 p-6 flex flex-col gap-4 md:hidden"
+          >
+            <div className="flex flex-col gap-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavigation(item.id)}
+                  className={`text-left font-medium text-lg px-4 py-3 rounded-xl transition-colors ${activeSection === item.id
+                      ? "bg-purple-50 text-purple-700"
+                      : "text-[#1e1040] hover:bg-gray-50"
+                    }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
 
-              <PhoneCall
-                className="
-                  w-3.5
-                  h-3.5
-                  text-[var(--color-lime)]
-                  transition-colors
-                  duration-300
-                "
-              />
-            </span>
-          </div>
-        </button>
-      </motion.nav>
-    </motion.div>
+            <button
+              onClick={() => handleNavigation("contact")}
+              className="mt-2 w-full px-6 py-4 rounded-full bg-white text-[#1e1040] font-bold text-center border-2 border-amber-600 shadow-[0_0_15px_rgba(147,51,234,0.3)] hover:bg-purple-50 transition-colors"
+            >
+              Book a Call
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

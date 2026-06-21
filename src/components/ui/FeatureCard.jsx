@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-export default function FeatureCard({ children, className = "", glowColor = "rgba(186, 243, 94, 0.12)" }) {
+export default function FeatureCard({ children, className = "", glowColor = "rgba(245, 158, 11, 0.12)" }) {
   const containerRef = useRef(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);

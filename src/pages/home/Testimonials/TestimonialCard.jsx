@@ -4,7 +4,7 @@ import FeatureCard from "@/components/ui/FeatureCard";
 
 export default function TestimonialCard({ stars = 5, quote, name, role, initial }) {
   return (
-    <FeatureCard className="p-8 text-left space-y-6 bg-[#141c17]/35 border border-lime/12" glowColor="rgba(186, 243, 94, 0.12)">
+    <FeatureCard className="p-8 text-left space-y-6 bg-[#141c17]/35 border border-lime/12" glowColor="rgba(245, 158, 11, 0.12)">
       <div className="flex items-center gap-1 text-lime">
         {Array.from({ length: stars }).map((_, i) => (
           <span key={i} className="text-md">★</span>

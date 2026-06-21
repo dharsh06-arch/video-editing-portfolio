@@ -69,12 +69,12 @@ export default function Home() {
     <div className="relative min-h-screen bg-black text-white overflow-hidden select-none">
       
       {/* Premium WebGL Fluid cursor effect */}
-      <SplashCursor />
+      {/* <SplashCursor /> */}
 
       {/* Global drifting green aurora background */}
       <div className="fixed inset-0 z-0 w-full h-full opacity-40 pointer-events-none">
         <Aurora
-          colorStops={["#050806", "#baf35e", "#141c17"]}
+          colorStops={["#050806", "#f59e0b", "#141c17"]}
           blend={0.65}
           amplitude={1.1}
           speed={0.4}

@@ -11,7 +11,7 @@ export default function SectionTitle({ tag, title, description, align = "left", 
         </span>
       )}
       <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-        {title} {highlightTitle && <span className="font-serif uppercase italic font-normal text-lime lowercase">{highlightTitle}</span>}
+        {title} {highlightTitle && <span className="uppercase italic font-normal text-lime lowercase">{highlightTitle}</span>}
       </h2>
       <div className={`w-16 h-1 bg-lime rounded-full ${isCenter ? "mx-auto" : "mr-auto"} mt-4`} />
       {description && (

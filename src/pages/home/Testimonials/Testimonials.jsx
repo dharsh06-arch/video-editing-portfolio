@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, Star } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
+import { NoiseTexture } from "@/components/ui/NoiseTexture";
 
 const testimonialsList = [
   {
@@ -42,7 +43,7 @@ const testimonialsList = [
     id: 4,
     username: "ira_creative",
     avatarContent: (
-      <div className="w-full h-full bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+      <div className="w-full h-full bg-gradient-to-br from-amber-600 to-yellow-600 flex items-center justify-center text-white font-bold text-sm">
         И
       </div>
     ),
@@ -104,20 +105,41 @@ export default function Testimonials() {
   };
 
   return (
-    <section 
+    <section
       id="testimonials"
-      className="relative z-20 py-24 px-6 md:px-12 lg:px-24 bg-black border-t border-[rgba(186,243,94,0.1)] overflow-hidden"
+      className="relative z-20 py-10 md:py-20 px-6 md:px-12 lg:px-24 bg-gradient-to-r from-[#111a14] via-[#080d0a] to-[#050806] overflow-hidden shadow-[0_20px_50px_rgba(5,8,6,0.9)]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Grid Background Pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none z-0" />
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
 
-      {/* Background radial gradients */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[rgba(186,243,94,0.03)] rounded-full blur-[140px] pointer-events-none z-0 animate-pulse" style={{ animationDuration: '10s' }} />
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div
+          className="absolute inset-0 [background-size:50px_50px] [background-image:linear-gradient(to_right,rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.12)_1px,transparent_1px)]"
+        />
+        {/* Radial gradient mask for faded edge look */}
+        <div className="absolute inset-0 bg-[#050806] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      </div>
+
+      <NoiseTexture
+        frequency={0.65}
+        octaves={5}
+        slope={0.75}
+        noiseOpacity={0.35}
+        className=""
+      />
+
+      {/* Edge glow beams (purple lamp light) */}
+      <div className="pointer-events-none absolute top-0 inset-x-0 h-px z-10" style={{ boxShadow: "0 0 60px 6px rgba(245, 158, 11,0.55), 0 0 120px 20px rgba(245, 158, 11,0.20)" }} />
+      <div className="pointer-events-none absolute bottom-0 inset-x-0 h-px z-10" style={{ boxShadow: "0 0 60px 6px rgba(245, 158, 11,0.55), 0 0 120px 20px rgba(245, 158, 11,0.20)" }} />
+
+      {/* Glowing Lighting Blends */}
+      <div className="absolute top-[20%] left-[20%] -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-amber-600/10 blur-[130px] pointer-events-none z-0" />
+      <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[600px] rounded-full bg-amber-500/10 blur-[150px] pointer-events-none z-0" />
 
       <div className="max-w-4xl mx-auto text-center relative z-10 space-y-12">
-        
+
         {/* Header Block */}
         <div className="space-y-4">
           <div className="inline-block px-4 py-1.5 rounded-full border-2 border-black bg-[#baf35e] text-black font-black text-xs font-sans uppercase tracking-widest shadow-[3px_3px_0px_#000000] transform -rotate-1">
@@ -129,8 +151,8 @@ export default function Testimonials() {
         </div>
 
         {/* Carousel Stack Area */}
-        <div className="relative w-full max-w-xl mx-auto h-[480px] md:h-[520px] flex items-center justify-center mt-12 overflow-visible">
-          
+        <div className="relative w-full max-w-4xl mx-auto h-[480px] md:h-[520px] flex items-center justify-center mt-12 overflow-visible">
+
           {/* Sparkles / Stars surrounding the stack */}
           <SparkleStar className="absolute -left-12 top-12 animate-bounce" style={{ animationDuration: '4s' }} />
           <SparkleStar className="absolute -right-8 top-32 animate-pulse scale-90" style={{ animationDuration: '3s' }} />
@@ -145,11 +167,11 @@ export default function Testimonials() {
                 const y = index * 120;
                 const scale = 1 - index * 0.03;
                 const zIndex = 30 - index * 10;
-                
+
                 // Colors alternate: Slot 0 (top) and Slot 2 (bottom) are lime green, Slot 1 (middle) is white
                 const isLime = index === 0 || index === 2;
                 const bg = isLime ? "bg-[#baf35e]" : "bg-white";
-                
+
                 // Rotations alternate left / right
                 const rotate = index === 0 ? 2 : index === 1 ? -2.5 : 1.5;
                 const xOffset = index === 0 ? 10 : index === 1 ? -10 : 6;
@@ -159,9 +181,9 @@ export default function Testimonials() {
                     key={test.id}
                     layout
                     initial={{ opacity: 0, scale: 0.85, y: y + 100 }}
-                    animate={{ 
+                    animate={{
                       opacity: 1 - index * 0.1, // slightly fade background cards
-                      scale: scale, 
+                      scale: scale,
                       y: y,
                       x: xOffset,
                       rotate: rotate,
