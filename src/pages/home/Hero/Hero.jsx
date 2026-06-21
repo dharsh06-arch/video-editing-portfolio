@@ -5,6 +5,7 @@ import { motion, useAnimation } from "framer-motion";
 import { Play, Pause, SkipBack, SkipForward, Scissors, Monitor, Layers, Volume2, Maximize, MousePointer2 } from "lucide-react";
 import { NoiseTexture } from "@/components/ui/NoiseTexture";
 import CallButn from "@/components/ui/CallButn";
+import { AvatarCircles } from "@/components/ui/AvatarCircles";
 
 export default function Hero({ onScrollToSection }) {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -20,6 +21,15 @@ export default function Hero({ onScrollToSection }) {
       controls.stop();
     }
   }, [isPlaying, controls]);
+
+  const MOCK_AVATARS = [
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
+    "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?auto=format&fit=crop&w=150&h=150&q=80",
+    "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=150&h=150&q=80",
+    "https://images.unsplash.com/photo-1570295999919-56ceb8e2a627?auto=format&fit=crop&w=150&h=150&q=80",
+    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
+    "https://images.unsplash.com/photo-1568605117036-5fe5d9cf32cf?auto=format&fit=crop&w=150&h=150&q=80",
+  ];
 
   return (
     <section
@@ -54,29 +64,40 @@ export default function Hero({ onScrollToSection }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mt-10"
+          className="text-center mt-14 md:mt-10"
         >
           <h1 className="text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold leading-[1.05] tracking-tight text-white mb-6 max-w-4xl mx-auto">
             Crafting Cinematic <br className="hidden md:block" />
             <span className="text-gradient-green">Masterpieces.</span>
           </h1>
 
- 
+
           <p className="text-white/60 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed mb-10 font-light">
             We transform raw footage into compelling narratives. Expert video editing, color grading, and visual effects that command attention.
           </p>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="flex flex-col sm:flex-row items-center justify-center mt-2 md:mt-4 mb-6 gap-3"
+          >
+            <AvatarCircles avatarUrls={MOCK_AVATARS} numPeople={120} />
+            <span className="text-sm text-white/60 font-medium">
+              Trusted by 100+ creators
+            </span>
+          </motion.div>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <div className="uiverse-glass-wrap w-full sm:w-auto flex justify-center">
-            <div className="button-shadow" />
-            <button className="glass-btn w-full sm:w-auto md:px-8 md:py-5">
-              <span className="label-span justify-center inline-flex tracking-[0.15rem]">
-                View Showreel
-                <Play className="w-3.5 h-3.5 fill-current text-[var(--color-lime-light)] drop-shadow-[0_0_3px_rgba(255,165,0,0.4)]" />
-              </span>
-            </button>
-          </div>
-           <CallButn/>
+              <div className="button-shadow" />
+              <button className="glass-btn w-full sm:w-auto md:px-8 md:py-5">
+                <span className="label-span justify-center inline-flex tracking-[0.15rem]">
+                  View Showreel
+                  <Play className="w-3.5 h-3.5 fill-current text-[var(--color-lime-light)] drop-shadow-[0_0_3px_rgba(255,165,0,0.4)]" />
+                </span>
+              </button>
+            </div>
+            <CallButn />
           </div>
         </motion.div>
 

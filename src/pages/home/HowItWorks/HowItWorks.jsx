@@ -74,10 +74,10 @@ export default function HowItWorks() {
 
         {/* Header Block */}
         <div className="text-center space-y-5 mb-24 flex flex-col items-center">
-          <div className="inline-flex items-center px-5 py-1.5 rounded-full bg-white/80 text-black text-sm font-semibold tracking-wide">
-            How it works
+          <div className="inline-block px-4 py-1.5 rounded-full border-2 border-black bg-[#9F5255] text-white font-black text-xs font-sans uppercase tracking-widest shadow-[3px_3px_0px_#000000] transform -rotate-1">
+            How It Works
           </div>
-          <h2 className="text-5xl md:text-6xl font-extrabold text-white tracking-tight">
+          <h2 className="pt-2 text-4xl md:text-7xl text-white tracking-tight leading-[1.05]">
             My Workflow
           </h2>
           <p className="text-lg text-white/70 max-w-lg mx-auto leading-relaxed">

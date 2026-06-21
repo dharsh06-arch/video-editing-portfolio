@@ -102,13 +102,11 @@ export default function Services() {
 
         {/* Header */}
         <div className="flex flex-col items-center text-center space-y-6 mb-16">
-          <div className="inline-flex items-center justify-center rounded-full bg-white/5 px-4 py-1.5 backdrop-blur-md border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
-            <span className="text-xs font-bold tracking-widest text-amber-400 uppercase">
-              Inside the Box
-            </span>
+          <div className="inline-block px-4 py-1.5 rounded-full border-2 border-black bg-[#9F5255] text-white font-black text-xs font-sans uppercase tracking-widest shadow-[3px_3px_0px_#000000] transform -rotate-1">
+            THE SERVICES
           </div>
 
-          <h2 className="text-5xl md:text-6xl font-medium text-white tracking-tighter drop-shadow-md">
+          <h2 className="text-4xl md:text-6xl font-medium text-white tracking-tighter drop-shadow-md">
             WHY CHOOSE US?
           </h2>
           <p className="text-white/60 text-base md:text-lg max-w-2xl leading-relaxed">

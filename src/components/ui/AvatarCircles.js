@@ -33,7 +33,7 @@ export function AvatarCircles({
       ))}
       {numPeople > 0 && (
         <div
-          className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-surface bg-lime text-center text-xs font-black text-black hover:bg-lime-light cursor-pointer shadow-lg select-none"
+          className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-surface bg-[#9F5255] text-center text-xs font-black text-black hover:bg-lime-light cursor-pointer shadow-lg select-none"
         >
           +{numPeople}
         </div>

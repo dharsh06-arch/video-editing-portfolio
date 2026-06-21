@@ -65,7 +65,7 @@ export default function About() {
               id="ribbonPath"
               d="M 0 200 Q 350 40, 700 200 T 1400 200 T 2100 200 T 2800 200 T 3500 200 T 4200 200 T 4900 200 T 5600 200"
               fill="none"
-              stroke="#a855f7"
+              stroke="#7B4019"
               strokeWidth="54"
               strokeLinecap="round"
             />
@@ -89,11 +89,9 @@ export default function About() {
 
             {/* Header / Content */}
             <div className="space-y-4 text-left">
-              <div className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-[rgba(20,28,23,0.6)] border border-[rgba(255,255,255,0.08)] backdrop-blur-xl">
-                <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-white)] relative z-10">
-                  THE ABOUT
-                </span>
-              </div>
+               <div className="inline-block px-4 py-1.5 rounded-full border-2 border-black bg-[#9F5255] text-white font-black text-xs font-sans uppercase tracking-widest shadow-[3px_3px_0px_#000000] transform -rotate-1">
+            THE ABOUT
+          </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
                 High-impact narrative. <br className="hidden md:block" />
                 <span className="font-normal text-amber-400 lowercase">Strategic video delivery.</span>

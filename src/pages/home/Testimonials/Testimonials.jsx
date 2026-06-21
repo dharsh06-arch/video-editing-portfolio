@@ -142,10 +142,11 @@ export default function Testimonials() {
 
         {/* Header Block */}
         <div className="space-y-4">
-          <div className="inline-block px-4 py-1.5 rounded-full border-2 border-black bg-[#baf35e] text-black font-black text-xs font-sans uppercase tracking-widest shadow-[3px_3px_0px_#000000] transform -rotate-1">
+          
+          <div className="inline-block px-4 py-1.5 rounded-full border-2 border-black bg-[#fca014] text-black font-black text-xs font-sans uppercase tracking-widest shadow-[3px_3px_0px_#000000] transform -rotate-1">
             Feedbacks
           </div>
-          <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-none pt-2">
+          <h2 className="text-4xl md:text-7xl text-white tracking-tight leading-[1.05] pt-2">
             What They Say?
           </h2>
         </div>
@@ -170,7 +171,7 @@ export default function Testimonials() {
 
                 // Colors alternate: Slot 0 (top) and Slot 2 (bottom) are lime green, Slot 1 (middle) is white
                 const isLime = index === 0 || index === 2;
-                const bg = isLime ? "bg-[#baf35e]" : "bg-white";
+                const bg = isLime ? "bg-[#F9B501]" : "bg-white";
 
                 // Rotations alternate left / right
                 const rotate = index === 0 ? 2 : index === 1 ? -2.5 : 1.5;
@@ -226,12 +227,12 @@ export default function Testimonials() {
           </div>
 
           {/* Overlay Arrow Controller on the right */}
-          <div className="absolute -right-8 md:-right-16 z-40">
+          <div className="absolute -right-4 sm:-right-6 md:-right-8 z-40">
             <button
               onClick={handleNext}
-              className="p-4 rounded-full border-2 border-black bg-white hover:bg-[#baf35e] text-black shadow-[4px_4px_0px_#000000] active:translate-y-0.5 active:shadow-[2px_2px_0px_#000000] transition-all cursor-pointer"
+              className="p-3 sm:p-3.5 md:p-4 rounded-full border-2 border-black bg-white hover:bg-[#fca501] text-black shadow-[3px_3px_0px_#000000] sm:shadow-[4px_4px_0px_#000000] active:translate-y-0.5 active:shadow-[2px_2px_0px_#000000] transition-all cursor-pointer"
             >
-              <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+              <ChevronRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 stroke-[2.5]" />
             </button>
           </div>
 
