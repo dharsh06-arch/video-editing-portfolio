@@ -69,7 +69,7 @@ export default function Home() {
     <div className="relative min-h-screen bg-black text-white overflow-hidden select-none">
       
       {/* Premium WebGL Fluid cursor effect */}
-      {/* <SplashCursor /> */}
+      <SplashCursor />
 
       {/* Global drifting green aurora background */}
       <div className="fixed inset-0 z-0 w-full h-full opacity-40 pointer-events-none">

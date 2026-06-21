@@ -28,7 +28,7 @@ export default function About() {
     <div>
       <section
         id="about"
-        className="relative z-20 min-h-[100svh] flex flex-col justify-center py-24 px-6 md:px-12 bg-gradient-to-r from-[#111a14] via-[#080d0a] to-[#050806] overflow-hidden shadow-[0_20px_50px_rgba(5,8,6,0.9)]"
+        className="relative z-20 xl:min-h-[100svh] flex flex-col justify-center py-24 px-6 md:px-12 bg-gradient-to-r from-[#111a14] via-[#080d0a] to-[#050806] overflow-hidden shadow-[0_20px_50px_rgba(5,8,6,0.9)]"
       >
         {/* Background Grid */}
         <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0" />
@@ -103,7 +103,7 @@ export default function About() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 py-6 border-y border-white/5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 py-6 border-y border-white/5">
               <div>
                 <div className="text-4xl md:text-5xl text-amber-400 tracking-tighter">
                   <CountUp to={100} suffix="+" duration={2.5} />

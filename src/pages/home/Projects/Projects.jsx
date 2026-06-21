@@ -110,24 +110,18 @@ function CoverflowCard({ project, isActive, distance, onClick }) {
 
 export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
   const autoPlayTimerRef = useRef(null);
 
   // Auto-scroll loop
   useEffect(() => {
-    if (isHovered) {
-      if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
-      return;
-    }
-
     autoPlayTimerRef.current = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % projects.length);
-    }, 4000);
+    }, 3500);
 
     return () => {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
     };
-  }, [isHovered]);
+  }, []);
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
@@ -141,8 +135,6 @@ export default function Projects() {
     <section
       id="projects"
       className="relative z-20 py-24 px-6 md:px-12 lg:px-24 bg-black border-t border-amber-500/10 overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
 
       <div className="absolute inset-0 bg-grid-pattern  pointer-events-none z-0" />

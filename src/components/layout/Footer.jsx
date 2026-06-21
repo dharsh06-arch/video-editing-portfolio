@@ -7,12 +7,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-20 w-full bg-[#050806] px-4 md:px-14 pb-12 pt-6 font-sans overflow-hidden">
+    <footer className="relative z-20 w-full bg-[#060a0d] px-4 md:px-14 pb-12 pt-6 font-sans overflow-hidden">
       {/* Underlying dynamic radial color burst gradient mimicking image_05c8c4.png */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.18)_0%,rgba(12,18,14,0.45)_50%,transparent_100%)] pointer-events-none" />
 
       {/* Centered Glass Panel Wrapper with enhanced down-to-up blend */}
-      <div className="w-full rounded-2xl p-8 md:py-16 md:px-12 glass-panel-dark bg-gradient-to-b from-[#1c140a]/95 via-[#2a1f12]/90 to-[#0f0a05]/95 shadow-2xl relative overflow-hidden flex flex-col items-center text-center border border-amber-900/30">
+      <div className="w-full rounded-2xl p-8 md:py-16 md:px-12 glass-panel-dark bg-gradient-to-b from-[#101415]/95 via-[#11181c]/95 to-[#050708]/95 shadow-2xl relative overflow-hidden flex flex-col items-center text-center border border-amber-900/30">
         {/* Soft Background Radial Lime Spotlight centered over head branding */}
         <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full glow-spot-lime pointer-events-none opacity-70" />
 

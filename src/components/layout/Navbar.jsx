@@ -1,11 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, PhoneCall } from "lucide-react"; // Imported PhoneCall here
 
 export default function Navbar({ onScrollToSection, activeSection = "projects" }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY > lastScrollY.current + 12 && currentY > 120) {
+        setIsHidden(true);
+      } else if (currentY < lastScrollY.current - 8) {
+        setIsHidden(false);
+      }
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { id: "home", label: "Home" },
@@ -24,7 +41,7 @@ export default function Navbar({ onScrollToSection, activeSection = "projects" }
   };
 
   return (
-    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 w-full">
+    <div className={`fixed top-6 left-0 right-0 z-50 flex justify-center px-4 w-full transition-all duration-300 ease-out ${isHidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"}`}>
       {/* Reduced Overall Navbar Padding */}
       <nav className="w-full max-w-3xl relative rounded-full bg-gradient-to-b from-neutral-900 to-black border border-neutral-800/80 shadow-[0_0_25px_rgba(255,255,255,0.08),0_10px_30px_rgba(0,0,0,0.7)] flex items-center justify-between px-6 py-2 backdrop-blur-md">
         

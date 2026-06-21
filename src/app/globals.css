@@ -46,6 +46,15 @@ body {
   color: var(--foreground);
   font-family: var(--font-outfit), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  cursor: none;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  cursor: none;
 }
 
 /* Premium Scrollbar */
@@ -700,6 +709,8 @@ button:hover .button__icon-svg--copy {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 220px;
+  min-height: 52px;
   padding: 14px 28px;
   font-family: inherit;
   font-size: 11px;

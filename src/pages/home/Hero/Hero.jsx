@@ -23,12 +23,12 @@ export default function Hero({ onScrollToSection }) {
   }, [isPlaying, controls]);
 
   const MOCK_AVATARS = [
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
-    "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?auto=format&fit=crop&w=150&h=150&q=80",
-    "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=150&h=150&q=80",
-    "https://images.unsplash.com/photo-1570295999919-56ceb8e2a627?auto=format&fit=crop&w=150&h=150&q=80",
-    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
-    "https://images.unsplash.com/photo-1568605117036-5fe5d9cf32cf?auto=format&fit=crop&w=150&h=150&q=80",
+    { imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80" },
+    { imageUrl: "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?auto=format&fit=crop&w=150&h=150&q=80" },
+    { imageUrl: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=150&h=150&q=80" },
+    { imageUrl: "https://images.unsplash.com/photo-1570295999919-56ceb8e2a627?auto=format&fit=crop&w=150&h=150&q=80" },
+    { imageUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80" },
+    { imageUrl: "https://images.unsplash.com/photo-1568605117036-5fe5d9cf32cf?auto=format&fit=crop&w=150&h=150&q=80" },
   ];
 
   return (
@@ -87,17 +87,22 @@ export default function Hero({ onScrollToSection }) {
             </span>
           </motion.div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-3xl">
             <div className="uiverse-glass-wrap w-full sm:w-auto flex justify-center">
               <div className="button-shadow" />
-              <button className="glass-btn w-full sm:w-auto md:px-8 md:py-5">
+              <button
+                onClick={() => onScrollToSection?.("projects")}
+                className="glass-btn w-full sm:w-auto min-w-[220px]"
+              >
                 <span className="label-span justify-center inline-flex tracking-[0.15rem]">
                   View Showreel
                   <Play className="w-3.5 h-3.5 fill-current text-[var(--color-lime-light)] drop-shadow-[0_0_3px_rgba(255,165,0,0.4)]" />
                 </span>
               </button>
             </div>
-            <CallButn />
+            <div className="w-full sm:w-auto flex justify-center">
+              <CallButn />
+            </div>
           </div>
         </motion.div>
 
