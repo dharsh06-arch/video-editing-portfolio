@@ -7,8 +7,8 @@ export default function CallButn({ onScrollToSection }) {
 
   return (
     <div className="uiverse-dexter-wrapper">
-      <button
-        onClick={() => onScrollToSection?.("contact")}
+      <a
+        href="tel:+918807820580"
         className="btn-dexter"
       >
         {/* Lucid Icon Replacement for custom inline SVGs */}
@@ -27,7 +27,7 @@ export default function CallButn({ onScrollToSection }) {
             </span>
           ))}
         </span>
-      </button>
+      </a>
     </div>
   );
 }
