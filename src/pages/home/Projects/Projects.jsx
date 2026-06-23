@@ -11,6 +11,14 @@ import { NoiseTexture } from "@/components/ui/NoiseTexture";
 function CoverflowCard({ project, isActive, distance, onClick }) {
   const videoRef = useRef(null);
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // Delay video loading slightly so initial page data and fonts load first
+    const timer = setTimeout(() => setIsMounted(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -19,15 +27,13 @@ function CoverflowCard({ project, isActive, distance, onClick }) {
       video.currentTime = 0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Auto-play safely failed
-        });
+        playPromise.catch(() => {});
       }
     } else {
       video.pause();
       video.currentTime = 0;
     }
-  }, [isActive]);
+  }, [isActive, isMounted]);
 
   return (
     <div
@@ -39,15 +45,15 @@ function CoverflowCard({ project, isActive, distance, onClick }) {
     >
       {/* Media Content */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none bg-neutral-900">
-        {project.videoUrl && (
+        {project.videoUrl && isMounted && (
           <video
             ref={videoRef}
             src={project.videoUrl}
             loop
             muted
             playsInline
-            preload="auto"
-            className="absolute inset-0 w-full h-full object-cover"
+            preload="metadata"
+            className="absolute inset-0 w-full h-full object-cover animate-in fade-in duration-700"
           />
         )}
         {/* Adjusted Overlay: Reduced darkening opacity to 0.2 and minimized the blur amount */}
@@ -130,13 +136,7 @@ export default function Projects() {
         <div className="absolute inset-0 bg-[#050806] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       </div>
 
-      <NoiseTexture
-        frequency={0.65}
-        octaves={5}
-        slope={0.75}
-        noiseOpacity={0.35}
-        className=""
-      />
+
 
       {/* Lighting Beams */}
       <div className="absolute -top-[150px] left-1/2 -translate-x-1/2 w-[800px] max-w-full h-[300px] bg-amber-600/20 blur-[120px] pointer-events-none z-0 rounded-full" />

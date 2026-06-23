@@ -84,13 +84,7 @@ export default function Services() {
         <div className="absolute inset-0 bg-[#050806] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       </div>
 
-      <NoiseTexture
-        frequency={0.65}
-        octaves={5}
-        slope={0.75}
-        noiseOpacity={0.35}
-        className=""
-      />
+
 
       {/* Edge glow beams */}
       <div className="pointer-events-none absolute top-0 inset-x-0 h-px z-10" style={{ boxShadow: "0 0 60px 6px rgba(245, 158, 11,0.55), 0 0 120px 20px rgba(245, 158, 11,0.20)" }} />

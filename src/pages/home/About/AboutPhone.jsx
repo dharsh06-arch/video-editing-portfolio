@@ -66,7 +66,7 @@ export default function AboutPhone() {
   return (
     <div 
       onWheel={handleWheel}
-      className="relative z-20 w-[280px] h-[550px] md:w-[300px] md:h-[600px] rounded-[44px] bg-[#050806] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.9),_0_0_30px_rgba(245, 158, 11,0.12)] border-[4px] border-white/10 hover:border-amber-500/30 transition-all duration-500 flex-shrink-0 mx-auto"
+      className="relative z-20 w-[330px] h-[580px] md:w-[300px] md:h-[600px] rounded-[44px] bg-[#050806] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.9),_0_0_30px_rgba(245, 158, 11,0.12)] border-[4px] border-white/10 hover:border-amber-500/30 transition-all duration-500 flex-shrink-0 mx-auto"
     >
       {/* Inner Screen */}
       <div className="relative w-full h-full rounded-[34px] overflow-hidden bg-black border border-white/5">
