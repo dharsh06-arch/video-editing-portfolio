@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Play, Eye } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { projects } from "@/data/projects";
 import { NoiseTexture } from "@/components/ui/NoiseTexture";
@@ -16,16 +16,14 @@ function CoverflowCard({ project, isActive, distance, onClick }) {
     if (!video) return;
 
     if (isActive) {
-      // Reset and play the video
       video.currentTime = 0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // Auto-play failed (usually browser autoplay restrictions)
+          // Auto-play safely failed
         });
       }
     } else {
-      // Pause and reset when not active
       video.pause();
       video.currentTime = 0;
     }
@@ -34,14 +32,13 @@ function CoverflowCard({ project, isActive, distance, onClick }) {
   return (
     <div
       onClick={onClick}
-      className={`relative w-[280px] sm:w-[320px] h-[400px] sm:h-[450px] rounded-[10px] overflow-hidden border transition-all duration-500  flex flex-col justify-end p-6 select-none cursor-pointer ${isActive
-          ? "border-amber-500 shadow-[0_0_30px_rgba(245, 158, 11,0.25)]"
+      className={`relative w-[260px] sm:w-[320px] h-[460px] sm:h-[550px] rounded-[10px] overflow-hidden border transition-all duration-500 flex flex-col justify-end p-6 select-none cursor-pointer ${isActive
+          ? "border-amber-500 shadow-[0_0_30px_rgba(245,158,11,0.25)]"
           : "border-white/10 hover:border-amber-500/30"
         }`}
     >
       {/* Media Content */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none bg-neutral-900">
-        {/* Video Preview - Paused poster frame when inactive, full playback when active */}
         {project.videoUrl && (
           <video
             ref={videoRef}
@@ -53,18 +50,15 @@ function CoverflowCard({ project, isActive, distance, onClick }) {
             className="absolute inset-0 w-full h-full object-cover"
           />
         )}
-        {/* Blur & Darken Overlay for inactive cards */}
+        {/* Adjusted Overlay: Reduced darkening opacity to 0.2 and minimized the blur amount */}
         <div 
           className="absolute inset-0 transition-all duration-700 pointer-events-none z-10"
           style={{
-            backgroundColor: isActive ? 'transparent' : 'rgba(0, 0, 0, 0.45)',
-            backdropFilter: isActive ? 'blur(0px)' : `blur(${distance === 1 ? 2 : distance >= 2 ? 3 : 0}px)`
+            backgroundColor: isActive ? 'transparent' : 'rgba(0, 0, 0, 0.20)',
+            backdropFilter: isActive ? 'blur(0px)' : `blur(${distance === 1 ? 0.5 : distance >= 2 ? 1 : 0}px)`
           }}
         />
       </div>
-
-      {/* Fade overlay */}
-      {/* <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent z-10" /> */}
 
       {/* Top Right Play indicator */}
       {!isActive && (
@@ -75,14 +69,6 @@ function CoverflowCard({ project, isActive, distance, onClick }) {
 
       {/* Card Details (Text and Stats) */}
       <div className="relative z-20 text-left space-y-2 mt-auto">
-
-        {/* Stats text */}
-        <div className={`text-[10px] font-extrabold uppercase tracking-widest flex items-center gap-1.5 transition-colors duration-500 ${isActive ? "text-amber-400" : "text-[#8e938f]"
-          }`}>
-          <Eye className="w-3.5 h-3.5 shrink-0" />
-          <span>{project.stats}</span>
-        </div>
-
         {/* Title */}
         <h3 className="text-lg sm:text-xl font-black text-white leading-tight font-sans">
           {project.title}
@@ -102,7 +88,6 @@ function CoverflowCard({ project, isActive, distance, onClick }) {
             </motion.p>
           )}
         </AnimatePresence>
-
       </div>
     </div>
   );
@@ -116,7 +101,7 @@ export default function Projects() {
   useEffect(() => {
     autoPlayTimerRef.current = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % projects.length);
-    }, 3500);
+    }, 4500);
 
     return () => {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
@@ -134,18 +119,16 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative z-20 py-24 px-6 md:px-12 lg:px-24 bg-black border-t border-amber-500/10 overflow-hidden"
+      className="relative z-20 py-24 px-4 sm:px-12 lg:px-24 bg-black border-t border-amber-500/10 overflow-hidden"
     >
+      <div className="absolute inset-0 bg-grid-pattern pointer-events-none z-0" />
 
-      <div className="absolute inset-0 bg-grid-pattern  pointer-events-none z-0" />
-
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div
-            className="absolute inset-0 [background-size:50px_50px] [background-image:linear-gradient(to_right,rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.12)_1px,transparent_1px)]"
-          />
-          {/* Radial gradient mask for faded edge look */}
-          <div className="absolute inset-0 bg-[#050806] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-        </div>
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div
+          className="absolute inset-0 [background-size:50px_50px] [background-image:linear-gradient(to_right,rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.12)_1px,transparent_1px)]"
+        />
+        <div className="absolute inset-0 bg-[#050806] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+      </div>
 
       <NoiseTexture
         frequency={0.65}
@@ -155,13 +138,9 @@ export default function Projects() {
         className=""
       />
 
-      {/* Top Lamp Light */}
+      {/* Lighting Beams */}
       <div className="absolute -top-[150px] left-1/2 -translate-x-1/2 w-[800px] max-w-full h-[300px] bg-amber-600/20 blur-[120px] pointer-events-none z-0 rounded-full" />
-
-      {/* Center Aura */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] max-w-full h-[700px] bg-amber-600/10 rounded-full blur-[160px] pointer-events-none z-0" />
-
-      {/* Bottom Lamp Light */}
       <div className="absolute -bottom-[150px] left-1/2 -translate-x-1/2 w-[800px] max-w-full h-[300px] bg-amber-600/20 blur-[120px] pointer-events-none z-0 rounded-full" />
 
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
@@ -190,27 +169,23 @@ export default function Projects() {
         </div>
 
         {/* 3D Coverflow Container */}
-        <div className="relative h-[480px] sm:h-[530px] w-full flex items-center justify-center overflow-visible py-8 perspective-[1200px]">
+        <div className="relative h-[500px] sm:h-[700px] w-full flex items-center justify-center overflow-hidden py-4 perspective-[1200px]">
           <div className="relative w-full max-w-[900px] h-full flex items-center justify-center overflow-visible transform-style-3d">
 
             {projects.map((proj, idx) => {
               const length = projects.length;
 
-              // Calculate wrapped distance in loop
               let diff = idx - activeIndex;
               if (diff < -length / 2) diff += length;
               if (diff > length / 2) diff -= length;
 
               const isCenter = diff === 0;
 
-              // Calculate position using strict CoverFlow math for perfect stacking
               const getXPosition = () => {
                 const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
                 if (diff === 0) return 0;
 
-                // Distance of the first side card from center
                 const baseOffset = isMobile ? 140 : 280;
-                // Distance between stacked side cards
                 const stackOffset = isMobile ? 60 : 100;
 
                 const x = baseOffset + (Math.abs(diff) - 1) * stackOffset;
@@ -219,7 +194,7 @@ export default function Projects() {
 
               return (
                 <motion.div
-                  key={proj.title}
+                  key={proj.videoUrl || idx}
                   className="absolute origin-center transform-style-3d pointer-events-auto"
                   style={{
                     zIndex: 10 - Math.abs(diff)
@@ -249,20 +224,6 @@ export default function Projects() {
 
           </div>
         </div>
-
-        {/* Dot Indicators */}
-        {/* <div className="flex justify-center items-center gap-2.5">
-          {projects.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveIndex(idx)}
-              className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${activeIndex === idx
-                  ? "w-8 bg-amber-500"
-                  : "w-2.5 bg-white/20 hover:bg-white/40"
-                }`}
-            />
-          ))}
-        </div> */}
 
       </div>
     </section>

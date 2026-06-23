@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { Play, Pause, SkipBack, SkipForward, Scissors, Monitor, Layers, Volume2, Maximize, MousePointer2 } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Scissors, Monitor, Layers, Volume2, Maximize, MousePointer2, Star } from "lucide-react";
 import { NoiseTexture } from "@/components/ui/NoiseTexture";
 import CallButn from "@/components/ui/CallButn";
 import { AvatarCircles } from "@/components/ui/AvatarCircles";
@@ -22,14 +22,32 @@ export default function Hero({ onScrollToSection }) {
     }
   }, [isPlaying, controls]);
 
-  const MOCK_AVATARS = [
-    { imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80" },
-    { imageUrl: "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?auto=format&fit=crop&w=150&h=150&q=80" },
-    { imageUrl: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=150&h=150&q=80" },
-    { imageUrl: "https://images.unsplash.com/photo-1570295999919-56ceb8e2a627?auto=format&fit=crop&w=150&h=150&q=80" },
-    { imageUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80" },
-    { imageUrl: "https://images.unsplash.com/photo-1568605117036-5fe5d9cf32cf?auto=format&fit=crop&w=150&h=150&q=80" },
-  ];
+ const MOCK_AVATARS = [
+  { 
+    imageUrl: "/images/Digital-toppers-academy-logo.jpg-Photoroom.png",
+    bgColor: "#E6EEC9" // Deep dark navy to contrast the blue & red "Digital Toppers" text
+  },
+  { 
+    imageUrl: "/images/kalinga-Photoroom.png",
+    bgColor: "#DCEEF1" // Clean dark gray to make the black/red Kalinga logo pop cleanly
+  },
+  { 
+    imageUrl: "/images/sakthi doc-Photoroom.png",
+    bgColor: "#0a0a0c" // Pure deep black so the bright white "SAKTHI HOSPITAL" text shines
+  },
+  { 
+    imageUrl: "/images/vlcsnap-2026-06-14-17h01m56s157-Photoroom.png",
+    bgColor: "#171717" // Neutral dark backing for the orange accent graphics
+  },
+  { 
+    imageUrl: "/images/vlcsnap-2026-06-14-17h12m41s462-Photoroom.png",
+    bgColor: "#0e1726" // Subtle blue-tinted dark base for the yellow accents
+  },
+  { 
+    imageUrl: "/images/vlcsnap-2026-06-14-17h17m42s499.png",
+    bgColor: "#ffffff" // Pure solid white to perfectly preserve that clean red logo badge
+  },
+];
 
   return (
     <section
@@ -75,17 +93,34 @@ export default function Hero({ onScrollToSection }) {
           <p className="text-white/60 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed mb-10 font-light">
             We transform raw footage into compelling narratives. Expert video editing, color grading, and visual effects that command attention.
           </p>
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.05 }}
-            className="flex flex-col sm:flex-row items-center justify-center mt-2 md:mt-4 mb-6 gap-3"
-          >
-            <AvatarCircles avatarUrls={MOCK_AVATARS} numPeople={120} />
-            <span className="text-sm text-white/60 font-medium">
-              Trusted by 100+ creators
-            </span>
-          </motion.div>
+       <motion.div
+  initial={{ opacity: 0, y: 15 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.05 }}
+  className="flex flex-col sm:flex-row items-center justify-center mt-2 md:mt-4 mb-6 gap-3"
+>
+  <AvatarCircles avatarUrls={MOCK_AVATARS} numPeople={"50+"} />
+  
+  <div className="flex flex-col sm:flex-row items-center gap-2">
+    {/* Premium 5-Star Rating */}
+    <div className="flex items-center gap-0.5">
+      {[...Array(5)].map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.05 + i * 0.05, type: "spring", stiffness: 300 }}
+        >
+          <Star className="w-4.5 h-4.5 text-amber-400 fill-amber-400 [filter:drop-shadow(0_0_3px_rgba(251,191,36,0.3))] transition-transform hover:scale-110 cursor-default" />
+        </motion.div>
+      ))}
+    </div>
+    
+    <span className="text-sm text-white/60 font-medium">
+      Trusted by 100+ creators
+    </span>
+  </div>
+</motion.div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-3xl">
             <div className="uiverse-glass-wrap w-full sm:w-auto flex justify-center">
@@ -137,7 +172,7 @@ export default function Hero({ onScrollToSection }) {
                 {/* Simulated Video Content */}
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 to-blue-900/40 mix-blend-overlay" />
                 <video
-                  src="https://res.cloudinary.com/ds61pb9ku/video/upload/Maharaja_oil_factory_1_n2jor6.mp4"
+                src="https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212576/Firefly_Ultra-realistic_cinematic_home_office_workspace_young_freelance_video_editor_working_on_a_h_1_qquldd.mp4"
                   autoPlay
                   loop
                   muted

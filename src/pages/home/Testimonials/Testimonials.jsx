@@ -5,61 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, Star } from "lucide-react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { NoiseTexture } from "@/components/ui/NoiseTexture";
-
-const testimonialsList = [
-  {
-    id: 1,
-    username: "cherokee316",
-    avatarContent: (
-      <svg viewBox="0 0 100 100" className="w-full h-full fill-[#0a1e38]">
-        <circle cx="50" cy="50" r="50" />
-        <path d="M 50,25 C 60,25 70,30 70,40 C 70,55 50,75 50,75 C 50,75 30,55 30,40 C 30,30 40,25 50,25 Z" fill="white" />
-        <path d="M 25,65 Q 50,45 75,65 Q 50,90 25,65" fill="#ffffff" />
-      </svg>
-    ),
-    comment: "Arrived quickly and in perfect condition. seller wrapped it so it wouldn't be damaged.",
-  },
-  {
-    id: 2,
-    username: "ericnjay",
-    avatarContent: (
-      <div className="w-full h-full bg-[#333] flex items-center justify-center text-white font-black text-sm">
-        🚚
-      </div>
-    ),
-    comment: "MAHALO fast shipping, perfect packaging and I got what I ordered. Awesome thank you again.",
-  },
-  {
-    id: 3,
-    username: "kclivlaughlove",
-    avatarContent: (
-      <div className="w-full h-full bg-black rounded-full flex items-center justify-center border-2 border-[#baf35e] text-[#baf35e] font-extrabold text-lg">
-        L
-      </div>
-    ),
-    comment: "Gr8 deals, excellent variety, entertaining stream, every item received safe & secure in thanks to care in packaging.",
-  },
-  {
-    id: 4,
-    username: "ira_creative",
-    avatarContent: (
-      <div className="w-full h-full bg-gradient-to-br from-amber-600 to-yellow-600 flex items-center justify-center text-white font-bold text-sm">
-        И
-      </div>
-    ),
-    comment: "Incredibly fast response, high-end pacing, and deep sound effects mapping. Retention grew by 54% in the first week!",
-  },
-  {
-    id: 5,
-    username: "vid_grower",
-    avatarContent: (
-      <div className="w-full h-full bg-gradient-to-br from-[#baf35e] to-emerald-500 flex items-center justify-center text-black font-extrabold text-sm">
-        VG
-      </div>
-    ),
-    comment: "Professional foley sync and pacing beats. Eliza is extremely easy to coordinate with, delivering flawless masters.",
-  }
-];
+import { testimonials } from "@/data/testimonials";
 
 // 4-pointed sparkle star decoration SVG
 const SparkleStar = ({ className, style }) => (
@@ -75,7 +21,7 @@ export default function Testimonials() {
 
   // Cycle forward
   const handleNext = () => {
-    setStartIndex((prev) => (prev + 1) % testimonialsList.length);
+    setStartIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   // Auto-scroll loop
@@ -98,8 +44,8 @@ export default function Testimonials() {
   const getVisibleCards = () => {
     const cards = [];
     for (let i = 0; i < 3; i++) {
-      const idx = (startIndex + i) % testimonialsList.length;
-      cards.push({ ...testimonialsList[idx], slotIndex: i });
+      const idx = (startIndex + i) % testimonials.length;
+      cards.push({ ...testimonials[idx], slotIndex: i });
     }
     return cards;
   };

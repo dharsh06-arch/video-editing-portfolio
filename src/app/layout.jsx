@@ -12,8 +12,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Premium Video Editing",
-  description: "Retention-driven video editing and audio foley synthesis for modern creators and brands.",
+  title: "Sakthi | Cinematographer & Visual Storyteller",
+  description: "Professional Cinematography, Photography, and Video Editing. Crafting cinematic narratives and high-impact visual stories for brands and creators.",
+    icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {

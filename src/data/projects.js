@@ -1,32 +1,26 @@
 export const projects = [
   {
-    title: "Fusion Japan Cinematic",
-    description: "High-energy cinematic promo focusing on neon aesthetics and rapid transitions.",
-    stats: "1.2M Views",
-    videoUrl: "https://res.cloudinary.com/ds61pb9ku/video/upload/Fushion_Japan_1_yxz6po.mp4"
+    videoUrl: "https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212576/Firefly_Ultra-realistic_cinematic_home_office_workspace_young_freelance_video_editor_working_on_a_h_1_qquldd.mp4"
   },
   {
-    title: "Godfather Ice Tea",
-    description: "Narrative-driven edit with color grading tailored to a dramatic, moody atmosphere.",
-    stats: "850K Views",
-    videoUrl: "https://res.cloudinary.com/ds61pb9ku/video/upload/God_father_ice_tea_d4ctim.mp4"
+    videoUrl: "https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212576/god_father_hyperlabs_lowbitrate_1_cyoyvg.mp4"
   },
   {
-    title: "Nimi Old School Tea",
-    description: "Commercial spot focused on product cinematography and crisp sound design.",
-    stats: "3.4M Views",
-    videoUrl: "https://res.cloudinary.com/ds61pb9ku/video/upload/nimi_old_school_tea_out_1_fqyddo.mp4"
+    videoUrl: "https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212575/Hashtag_creators_academy_3rd_video_before_and_after_lowbitrate_1_zflsej.mp4"
   },
   {
-    title: "Red Chudi Nimiglo",
-    description: "Educational promo aimed at maximizing viewer retention through dynamic text and punchy SFX.",
-    stats: "2.1M Views",
-    videoUrl: "https://res.cloudinary.com/ds61pb9ku/video/upload/Red_chudi_nimiglo_1_fj4rwe.mp4"
+    videoUrl: "https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212560/kalinga_lowbitrate_-_Trim_1_au7url.mp4"
   },
   {
-    title: "Continental Special",
-    description: "Premium showcase edit featuring intricate speed-ramping and immersive audio mixing.",
-    stats: "920K Views",
-    videoUrl: "https://res.cloudinary.com/ds61pb9ku/video/upload/god_father_continental_final_1_p3ifet.mp4"
-  }
+    videoUrl: "https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212545/Hashtag_creators_academy_2nd_video_before_and_after_lowbitrate_1_dzftah.mp4"
+  },
+  {
+    videoUrl: "https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212531/Annapoorna_solo_dish_final_lowbitrate_1_bce7yk.mp4"
+  },
+  {
+    videoUrl: "https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212508/sakthi_doctor_lowbitrate_1_gsimnw.mp4"
+  },
+  {
+    videoUrl: "https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212488/Digital_Topper_Ai_Digital_Marketing_Video_Final_1_tjxtxq.mp4"
+  },
 ];

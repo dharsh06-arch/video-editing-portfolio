@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TrendingUp, Calendar, Heart, MessageSquare, PhoneCall } from "lucide-react";
+import { TrendingUp, Calendar, Heart, MessageSquare, PhoneCall, MessageCircle } from "lucide-react";
 import PhoneMockup from "@/components/shared/PhoneMockup";
 import { NoiseTexture } from "@/components/ui/NoiseTexture";
 
@@ -78,32 +78,33 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+     <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full sm:w-auto">
   {/* Premium Style: Book a Free Call */}
   <a
-    href="#book"
-    className="premium-call-btn relative font-bold text-sm tracking-wide uppercase select-none group inline-block"
+    href="tel:+918807820580"
+    className="premium-call-btn relative font-bold text-sm tracking-wide uppercase select-none group block sm:inline-block text-center w-full sm:w-auto"
   >
     {/* Animated fluid blur backdrop layer */}
-    <div className="premium-call-blob" />
+    <div className="premium-call-blob absolute inset-0 rounded-full" />
     
-    {/* Inner layout text layer matching your style structure */}
-    <div className="premium-call-inner px-8 py-3.5 bg-white text-black rounded-full transition-all duration-300 transform group-hover:scale-[1.02] shadow-[0_0_30px_rgba(245,158,11,0.2)]">
-      <span className="flex items-center justify-center gap-2">
-        <span>Book a Free Call</span>
-        <PhoneCall
-          className="w-4 h-4 text-[var(--color-lime)] transition-colors duration-300" 
-        />
-      </span>
+    {/* Inner layout text layer */}
+    <div className="premium-call-inner relative z-10 flex items-center justify-center gap-2 px-8 py-3.5 bg-black border border-white/10 text-white rounded-full transition-all duration-300 transform group-hover:scale-[1.02] shadow-[0_0_30px_rgba(245,158,11,0.2)] w-full h-full min-h-[48px]">
+      <span>Book a Free Call</span>
+      <PhoneCall
+        className="w-4 h-4 text-[var(--color-lime)] transition-colors duration-300" 
+      />
     </div>
   </a>
 
   {/* Border Style: Ask a Question */}
   <a
-    href="#ask"
-    className="px-8 py-3.5 bg-black rounded-full border border-white/40 hover:border-white text-white font-bold text-sm tracking-wide transition-all duration-300 hover:bg-white/5"
+    href="mailto:sakthivelsugumaran98@gmail.com"
+    className="group flex items-center justify-center gap-2 px-8 py-3.5 bg-black rounded-full border border-white/40 hover:border-white text-white font-bold text-sm tracking-wide transition-all duration-300 hover:bg-white/5 text-center min-h-[48px] w-full sm:w-auto"
   >
-    Ask a Question
+    <span>Ask a Question</span>
+    <MessageCircle 
+      className="w-4 h-4 text-white/70 group-hover:text-white transition-all duration-300 transform group-hover:-translate-y-0.5 group-hover:scale-110" 
+    />
   </a>
 </div>
         </div>
@@ -157,7 +158,7 @@ export default function Contact() {
           <div className="relative z-10 w-full max-w-[290px] sm:max-w-[320px] md:max-w-[340px] lg:max-w-[360px] flex justify-center lg:mr-4">
             <PhoneMockup
               backCards={[]}
-              playlist={["https://res.cloudinary.com/ds61pb9ku/video/upload/Fushion_Japan_1_yxz6po.mp4"]}
+              playlist={["https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212545/Hashtag_creators_academy_2nd_video_before_and_after_lowbitrate_1_dzftah.mp4"]}
               songNames={["FUSION_JAPAN.MP4"]}
             />
           </div>

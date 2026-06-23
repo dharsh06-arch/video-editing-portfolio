@@ -2,135 +2,142 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import Aurora from "@/components/ui/Aurora";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-20 w-full bg-black px-4 md:px-14 pb-12 pt-6 font-sans overflow-hidden">
-      
-      {/* Underlying layout grid matching the section texture */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:40px_40px] opacity-30 pointer-events-none z-0" />
+    <footer className="relative z-20 w-full bg-[#0a0a0a] px-4 sm:px-6 md:px-14 py-8 md:py-16 overflow-hidden">
+      {/* Aurora Background - Full coverage */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+        <Aurora
+          colorStops={["#f59e0b", "#fbbf24", "#f59e0b"]}
+          blend={0.5}
+          amplitude={0.8}
+          speed={0.6}
+        />
+      </div>
 
-      {/* 
-        EXTERNAL ORANGE/AMBER GLOW ACCENT FLUID RADIATING OUTSIDE THE PANEL:
-        Perfectly replicates the intense violet color spread spill behavior behind the frame in image_1135ab.jpg
-      */}
-      <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/3 w-[90%] max-w-[1200px] h-[350px] rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.16)_0%,rgba(245,158,11,0.04)_45%,transparent_70%)] blur-[40px] pointer-events-none z-0" />
+      {/* GRID PATTERN - White dots (smaller on mobile) */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: "30px 30px",
+          backgroundPosition: "0 0",
+        }}
+      />
 
-      {/* Centered Premium Glass Panel Wrapper */}
-      <div className="w-full rounded-2xl p-8 md:py-16 md:px-12 glass-panel-dark bg-gradient-to-b from-[#0a0f12]/95 via-[#070a0d]/98 to-[#040608]/99 shadow-2xl relative overflow-hidden flex flex-col items-center text-center border border-white/[0.03] z-10">
-        
-        {/* Subtle, soft interior orange bloom inside the glass panel for depth balance */}
-        <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-full h-48 bg-[radial-gradient(ellipse_at_bottom,rgba(245,158,11,0.05)_0%,transparent_70%)] pointer-events-none z-0" />
+      {/* Secondary larger dots - hidden on mobile */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0 hidden md:block"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: "100px 100px",
+          backgroundPosition: "25px 25px",
+        }}
+      />
 
-        <div className="flex flex-col items-center relative z-10">
-          <div className="flex items-center gap-4 mb-5">
-            <div className="text-center">
-              {/* Premium Header Branding */}
-              <h2 className="text-4xl font-bold tracking-tighter text-white pb-1">
-                Sakthi
-              </h2>
-              <p className="text-amber-500 text-xs font-bold tracking-[0.25em] uppercase opacity-90">
-                Visual Storyteller
-              </p>
-            </div>
+      {/* Center Glow - reduced on mobile */}
+      <div
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] md:w-[70%] max-w-[800px] h-[300px] md:h-[500px] rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0"
+        style={{
+          background: `radial-gradient(ellipse at center, rgba(255, 255, 255, 0.03) 0%, transparent 70%)`,
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Top Row: Brand + Newsletter */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 mb-8 md:mb-14">
+          {/* Left: Brand */}
+          <div className="text-center md:text-left">
+            <h2 className="text-3xl md:text-5xl font-medium tracking-tighter text-white pb-1">
+              Sakthi
+            </h2>
+            <p className="text-[#f59e0b] text-[10px] md:text-xs font-bold tracking-[0.25em] uppercase">
+              Visual Storyteller
+            </p>
+            <p className="text-[#8a8f8b] text-xs md:text-sm mt-3 md:mt-4 max-w-sm mx-auto md:mx-0 leading-relaxed">
+              Capture moments, create moments through light, motion, and
+              perspective.
+            </p>
           </div>
-
-          <p className="max-w-md text-slate-400 leading-relaxed mb-12 text-[15px]">
-            Capturing moments, crafting emotions through light, motion, and perspective.
-          </p>
         </div>
 
-        {/* Primary Horizontal Navigation Row */}
-        <nav className="relative z-10 flex flex-wrap justify-center items-center gap-x-8 gap-y-4 mb-10 text-sm font-semibold tracking-wide text-slate-400 border-b border-white/5 pb-8 w-full max-w-4xl">
-          {[
-            { name: "Home", href: "#home" },
-            { name: "About", href: "#about" },
-            { name: "Projects", href: "#projects" },
-            { name: "Services", href: "#services" },
-            { name: "Reviews", href: "#reviews" },
-            { name: "Contact", href: "#contact" },
-          ].map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="group relative py-2 px-2 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
-            >
-              {/* Top Line Micro-Glow Accent Reveal on Hover using Amber highlight */}
-              <span className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-transparent via-[#f59e0b] to-transparent opacity-0 group-hover:w-full group-hover:opacity-100 transition-all duration-300 ease-out shadow-[0_0_12px_rgba(245,158,11,0.6)]" />
-
-              <span>{link.name}</span>
-
-              {/* Micro sliding icon indicator */}
-              <span className="w-3.5 h-3.5 relative overflow-hidden scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 ease-out shrink-0 text-[#f59e0b]">
-                <ArrowUpRight className="w-3.5 h-3.5 absolute transition-transform duration-300 ease-in-out button__icon-svg group-hover:translate-x-4 group-hover:-translate-y-4" />
-                <ArrowUpRight className="w-3.5 h-3.5 absolute transition-transform duration-300 ease-in-out button__icon-svg--copy translate-x-[-150%] translate-y-[150%] group-hover:translate-x-0 group-hover:translate-y-0" />
-              </span>
-            </Link>
-          ))}
+        {/* Middle: Navigation */}
+        <nav className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-x-8 gap-y-2 md:gap-y-3 mb-8 md:mb-12 text-xs md:text-sm font-medium text-[#8a8f8b] border-b border-white/5 pb-6 md:pb-8">
+          {["Home", "About", "Projects", "Services", "Review", "Contact"].map(
+            (name) => (
+              <Link
+                key={name}
+                href={`#${name.toLowerCase()}`}
+                className="hover:text-white transition-colors duration-300 relative group"
+              >
+                {name}
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#f59e0b] group-hover:w-full transition-all duration-300" />
+              </Link>
+            ),
+          )}
         </nav>
 
-        {/* Contact Interactivity Row */}
-        <div className="relative z-10 flex flex-col sm:flex-row flex-wrap justify-center items-center gap-x-12 gap-y-4 mb-10 text-sm font-medium text-slate-400">
-          <a
-            href="tel:+918807820580"
-            className="group flex items-center gap-1.5 hover:text-white transition-colors tracking-wide"
-          >
-            <span>+91 88078 20580</span>
-            <span className="w-3.5 h-3.5 relative overflow-hidden scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200 shrink-0 text-[#f59e0b]">
-              <ArrowUpRight className="w-3.5 h-3.5 absolute button__icon-svg group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
-              <ArrowUpRight className="w-3.5 h-3.5 absolute button__icon-svg--copy translate-x-[-150%] translate-y-[150%] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300" />
-            </span>
-          </a>
+        {/* Bottom: Contact + Social */}
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-4 md:gap-6 mb-6 md:mb-8">
+          {/* Contact */}
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start items-center sm:items-center gap-2 md:gap-x-6 gap-y-1.5 md:gap-y-2 text-xs md:text-sm text-[#8a8f8b]">
+            <a
+              href="tel:+918807820580"
+              className="hover:text-white transition-colors"
+            >
+              +91 88078 20580
+            </a>
+            <span className="text-white/10 hidden sm:inline">|</span>
+            <a
+              href="mailto:sakthivelsugumaran98@gmail.com"
+              className="hover:text-white transition-colors text-center sm:text-left"
+            >
+              sakthivelsugumaran98@gmail.com
+            </a>
+            <span className="text-white/10 hidden sm:inline">|</span>
+            <span className="text-[#5a5f5b]">Karaikudi, Tamil Nadu, IN</span>
+          </div>
 
-          <a
-            href="mailto:sakthivelsugumaran98@gmail.com"
-            className="group flex items-center gap-1.5 hover:text-white transition-colors"
-          >
-            <span>sakthivelsugumaran98@gmail.com</span>
-            <span className="w-3.5 h-3.5 relative overflow-hidden scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200 shrink-0 text-[#f59e0b]">
-              <ArrowUpRight className="w-3.5 h-3.5 absolute button__icon-svg group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
-              <ArrowUpRight className="w-3.5 h-3.5 absolute button__icon-svg--copy translate-x-[-150%] translate-y-[150%] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300" />
-            </span>
-          </a>
-
-          <span className="text-white/10 hidden sm:inline">|</span>
-
-          <p className="tracking-wide text-slate-500">Karaikudi, Tamil Nadu, IN</p>
+          {/* Social */}
+          <div className="flex items-center gap-3 md:gap-4">
+            <a
+              href="https://www.instagram.com/_sakthimaran_/"
+              className="group flex items-center gap-1.5 md:gap-2 text-[#8a8f8b] hover:text-white transition-colors"
+            >
+              <FaInstagram className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:text-[#f59e0b] transition-colors" />
+              <span className="text-[10px] md:text-xs font-medium">
+                Instagram
+              </span>
+            </a>
+            <a
+              href="https://wa.me/918807820580"
+              className="group flex items-center gap-1.5 md:gap-2 text-[#8a8f8b] hover:text-white transition-colors"
+            >
+              <FaWhatsapp className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:text-[#f59e0b] transition-colors" />
+              <span className="text-[10px] md:text-xs font-medium">
+                WhatsApp
+              </span>
+            </a>
+          </div>
         </div>
 
-        {/* Social Sub-Menu Links */}
-        <div className="relative z-10 flex items-center justify-center gap-8 mb-12 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
-          <a
-            href="#"
-            className="group flex items-center gap-1 hover:text-white transition-colors"
-          >
-            <span>Instagram</span>
-            <span className="w-3 h-3 relative overflow-hidden scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200 shrink-0 text-[#f59e0b]">
-              <ArrowUpRight className="w-3 h-3 absolute button__icon-svg group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
-              <ArrowUpRight className="w-3 h-3 absolute button__icon-svg--copy translate-x-[-150%] translate-y-[150%] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300" />
-            </span>
-          </a>
-          <a
-            href="#"
-            className="group flex items-center gap-1 hover:text-white transition-colors"
-          >
-            <span>WhatsApp</span>
-            <span className="w-3 h-3 relative overflow-hidden scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200 shrink-0 text-[#f59e0b]">
-              <ArrowUpRight className="w-3 h-3 absolute button__icon-svg group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
-              <ArrowUpRight className="w-3 h-3 absolute button__icon-svg--copy translate-x-[-150%] translate-y-[150%] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300" />
-            </span>
-          </a>
-        </div>
-
-        {/* Bottom Metadata Container */}
-        <div className="relative z-10 pt-8 border-t border-white/5 w-full flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-          <p className="text-xs font-medium text-slate-600 order-2 md:order-1">
+        {/* Bottom Bar */}
+        <div className="pt-4 md:pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-3 text-[10px] md:text-xs">
+          <p className="text-[#4a4f4b] text-center">
             Copyright © {currentYear} Sakthivel S. All rights reserved.
           </p>
-          <p className="text-[10px] tracking-[0.25em] font-bold uppercase text-slate-500 order-1 md:order-2">
-            Photographer &bull; Cinematographer &bull; Video Editor
+          <p className="text-[#5a5f5b] tracking-[0.15em] text-center">
+            Photographer • Cinematographer • Video Editor
           </p>
         </div>
       </div>

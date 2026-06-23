@@ -6,6 +6,7 @@ import { Heart, MessageCircle, Share2, ChevronUp, ChevronDown } from "lucide-rea
 
 const videos = [
   "https://res.cloudinary.com/ds61pb9ku/video/upload/Fushion_Japan_1_yxz6po.mp4",
+  "https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212575/Hashtag_creators_academy_3rd_video_before_and_after_lowbitrate_1_zflsej.mp4",
   "https://res.cloudinary.com/ds61pb9ku/video/upload/God_father_ice_tea_d4ctim.mp4",
   "https://res.cloudinary.com/ds61pb9ku/video/upload/nimi_old_school_tea_out_1_fqyddo.mp4",
   "https://res.cloudinary.com/ds61pb9ku/video/upload/Red_chudi_nimiglo_1_fj4rwe.mp4",

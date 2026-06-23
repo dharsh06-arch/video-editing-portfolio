@@ -58,14 +58,9 @@ select {
 }
 
 /* Premium Scrollbar */
-
 ::-webkit-scrollbar {
   width: 8px;
 }
-
-/* ::-webkit-scrollbar-track {
-  background: var(--color-black);
-} */
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-lime);
@@ -77,7 +72,7 @@ select {
 }
 
 /* ========================================= */
-/* Glass Effects */
+/* Glass Effects                             */
 /* ========================================= */
 
 .glass-panel {
@@ -102,7 +97,7 @@ select {
 }
 
 /* ========================================= */
-/* Text Gradients */
+/* Text Gradients                            */
 /* ========================================= */
 
 .text-gradient-green {
@@ -112,7 +107,6 @@ select {
     #f59e0b 60%,
     #8e938f 100%
   );
-
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -123,13 +117,12 @@ select {
     #a3aca6 0%,
     #ffffff 100%
   );
-
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* ========================================= */
-/* Glow Effects */
+/* Glow Effects                              */
 /* ========================================= */
 
 .glow-lime {
@@ -147,7 +140,7 @@ select {
 }
 
 /* ========================================= */
-/* Background Patterns */
+/* Background Patterns                       */
 /* ========================================= */
 
 .bg-grid-pattern {
@@ -165,7 +158,7 @@ select {
 }
 
 /* ========================================= */
-/* Selection */
+/* Selection                                 */
 /* ========================================= */
 
 ::selection {
@@ -174,7 +167,7 @@ select {
 }
 
 /* ========================================= */
-/* Uiverse Sliding Icon Button Effects */
+/* Uiverse Sliding Icon Button Effects       */
 /* ========================================= */
 
 .button__icon-wrapper {
@@ -200,7 +193,6 @@ select {
   transform: translate(-150%, 150%);
 }
 
-/* Slide animation triggers on hover of parent group or button */
 .group:hover .button__icon-wrapper,
 button:hover .button__icon-wrapper {
   color: #000 !important;
@@ -218,7 +210,6 @@ button:hover .button__icon-svg--copy {
 }
 
 #process::before {
-  /* Grid Pattern Background */
   content: "";
   position: absolute;
   inset: 0;
@@ -227,23 +218,24 @@ button:hover .button__icon-svg--copy {
   background-image:
     linear-gradient(rgba(245, 158, 11, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
-  background-size: 40}
+  background-size: 40px 40px;
+}
 
+/* ========================================= */
+/* Premium Call Button Base Styles           */
+/* ========================================= */
 
-  
-  .premium-call-btn {
+.premium-call-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 1.5px;
   border: 0;
   border-radius: 999px;
   overflow: hidden;
   cursor: pointer;
   isolation: isolate;
-
   background:
     radial-gradient(circle at 0% 0%, #000 0%, transparent 22%),
     radial-gradient(circle at 100% 100%, #000 0%, transparent 24%),
@@ -257,14 +249,11 @@ button:hover .button__icon-svg--copy {
       #101510 85%,
       var(--color-black) 100%
     );
-
   background-size: 260% 260%;
   animation: premiumBorderFlow 6s ease-in-out infinite;
-
   box-shadow:
     0 18px 55px rgba(186, 243, 94, 0.18),
     0 0 0 1px rgba(255, 255, 255, 0.03) inset;
-
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -272,7 +261,6 @@ button:hover .button__icon-svg--copy {
   content: "";
   position: absolute;
   inset: -120%;
-
   background: conic-gradient(
     from 90deg,
     transparent 0deg,
@@ -283,7 +271,6 @@ button:hover .button__icon-svg--copy {
     rgba(210, 247, 140, 0.15) 280deg,
     transparent 330deg
   );
-
   filter: blur(32px);
   opacity: 0.5;
   animation: haloOrbit 12s linear infinite;
@@ -295,14 +282,12 @@ button:hover .button__icon-svg--copy {
   position: absolute;
   inset: 1px;
   border-radius: inherit;
-
   background: linear-gradient(
     115deg,
     transparent 0%,
     rgba(255,255,255,0.12) 20%,
     transparent 40%
   );
-
   background-size: 260% 100%;
   animation: microSheen 5s ease-in-out infinite;
   opacity: .4;
@@ -312,12 +297,9 @@ button:hover .button__icon-svg--copy {
   position: absolute;
   width: 180px;
   height: 180px;
-
   left: -90px;
   bottom: -100px;
-
   border-radius: 999px;
-
   background:
     radial-gradient(
       circle,
@@ -329,28 +311,22 @@ button:hover .button__icon-svg--copy {
       rgba(210,247,140,.4) 20%,
       transparent 70%
     );
-
   filter: blur(36px);
   opacity: .7;
-
   animation: lavaFloat 8s ease-in-out infinite;
-
   z-index: -1;
 }
 
 .premium-call-inner {
   position: relative;
   z-index: 2;
-
   padding: 12px 22px;
   border-radius: inherit;
-
   color: var(--color-white);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
-
   background:
     radial-gradient(
       circle at 18% 90%,
@@ -363,19 +339,15 @@ button:hover .button__icon-svg--copy {
       var(--color-dark) 60%,
       var(--color-black) 100%
     );
-
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.08),
     inset 0 -18px 34px rgba(0,0,0,.4);
-
   backdrop-filter: blur(18px);
-
   transition: all .8s cubic-bezier(0.16,1,0.3,1);
 }
 
 .premium-call-btn:hover {
   transform: translateY(-4px) scale(1.02);
-
   box-shadow:
     0 35px 100px rgba(186,243,94,.28),
     0 0 60px rgba(186,243,94,.15);
@@ -383,7 +355,6 @@ button:hover .button__icon-svg--copy {
 
 .premium-call-btn:hover .premium-call-inner {
   text-shadow: 0 0 18px rgba(186,243,94,.3);
-
   background:
     radial-gradient(
       circle at 18% 90%,
@@ -412,42 +383,26 @@ button:hover .button__icon-svg--copy {
 }
 
 @keyframes haloOrbit {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes microSheen {
-  0%,35% {
-    background-position: 140% 0;
-  }
-  65%,100% {
-    background-position: -140% 0;
-  }
+  0%,35% { background-position: 140% 0; }
+  65%,100% { background-position: -140% 0; }
 }
 
 @keyframes lavaFloat {
-  0% {
-    transform: translate3d(0,0,0) scale(.95);
-  }
-  50% {
-    transform: translate3d(30px,-18px,0) scale(1.08);
-  }
-  100% {
-    transform: translate3d(0,0,0) scale(.95);
-  }
+  0% { transform: translate3d(0,0,0) scale(.95); }
+  50% { transform: translate3d(30px,-18px,0) scale(1.08); }
+  100% { transform: translate3d(0,0,0) scale(.95); }
 }
-
 
 .shimmer-pill {
   position: relative;
   overflow: hidden;
 }
 
-/* moving shine */
 .shimmer-pill::before {
   content: "";
   position: absolute;
@@ -474,9 +429,8 @@ button:hover .button__icon-svg--copy {
   100% { left: 140%; }
 }
 
-
 /* ========================================= */
-/* Uiverse Glassmorphic Orange Variant defs  */
+/* Uiverse Glassmorphic (View Showreel)      */
 /* ========================================= */
 @property --uiverse-angle-1 {
   syntax: "<angle>";
@@ -501,7 +455,6 @@ button:hover .button__icon-svg--copy {
   transition: all var(--anim--hover-time) var(--anim--hover-ease);
 }
 
-/* Button Shadow Overlay */
 .uiverse-glass-wrap .button-shadow {
   --shadow-cuttoff-fix: 2em;
   position: absolute;
@@ -521,7 +474,6 @@ button:hover .button__icon-svg--copy {
   z-index: 0;
   inset: 0;
   border-radius: 999vw;
-  /* Uses your custom lime/orange background blur shadow overlay */
   background: linear-gradient(180deg, rgba(245, 158, 11, 0.15), rgba(0, 0, 0, 0));
   width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
   height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
@@ -537,7 +489,6 @@ button:hover .button__icon-svg--copy {
   opacity: 1;
 }
 
-/* Glass Target Core Button */
 .uiverse-glass-wrap button.glass-btn {
   --border-width: clamp(1px, 0.0625em, 4px);
   all: unset;
@@ -546,7 +497,16 @@ button:hover .button__icon-svg--copy {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   pointer-events: auto;
   z-index: 3;
-  /* Dark backdrop with alpha transparency blending */
+  
+  /* ─── ALIGNMENT METRICS SYNC ─── */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  min-height: 52px;
+  box-sizing: border-box;
+  /* ────────────────────────────── */
+
   background: linear-gradient(
     -75deg,
     rgba(255, 255, 255, 0.03),
@@ -573,28 +533,27 @@ button:hover .button__icon-svg--copy {
     0 0 0.05em 0.1em inset rgba(245, 158, 11, 0.3);
 }
 
-/* Glass Core Label Text */
 .uiverse-glass-wrap button.glass-btn span.label-span {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.625em;
   user-select: none;
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 700;        /* Matched to .btn-dexter */
   font-size: 11px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15rem; /* Matched to .btn-dexter */
   text-transform: uppercase;
-  /* Adjusted color text structure to match your white theme colors */
   color: var(--color-white);
   -webkit-font-smoothing: antialiased;
   text-shadow: 0em 0.15em 0.25em rgba(0, 0, 0, 0.8);
   transition: all var(--anim--hover-time) var(--anim--hover-ease);
-  padding-inline: 2em;
-  padding-block: 0.95em;
+  
+  /* ─── PADDING MIRROR SYNC ─── */
+  padding: 14px 28px;      /* Matches the hit box area of dexter */
 }
 
-/* Shimmer Highlight Layer */
 .uiverse-glass-wrap button.glass-btn span.label-span::after {
   content: "";
   display: block;
@@ -631,7 +590,6 @@ button:hover .button__icon-svg--copy {
   --uiverse-angle-2: -15deg;
 }
 
-/* Outer Metallic Border Ring Edge */
 .uiverse-glass-wrap button.glass-btn::after {
   content: "";
   position: absolute;
@@ -667,7 +625,6 @@ button:hover .button__icon-svg--copy {
   --uiverse-angle-1: -75deg;
 }
 
-/* Shadow Triggers */
 .uiverse-glass-wrap:has(button.glass-btn:hover) .button-shadow {
   filter: blur(6px);
 }
@@ -676,7 +633,6 @@ button:hover .button__icon-svg--copy {
   top: calc(var(--shadow-cuttoff-fix) - 0.875em);
 }
 
-/* Perspective Rotation Feature on Active Clickpress */
 .uiverse-glass-wrap:has(button.glass-btn:active) {
   transform: rotate3d(1, 0, 0, 20deg);
 }
@@ -688,9 +644,8 @@ button:hover .button__icon-svg--copy {
     0 0 0.05em 0.1em inset rgba(245, 158, 11, 0.4);
 }
 
-
 /* ========================================================= */
-/* Uiverse Dexter-St Orange Variant (Book a Consultation)  */
+/* Uiverse Dexter-St Orange Variant (Book a Consultation)    */
 /* ========================================================= */
 
 .uiverse-dexter-wrapper {
@@ -703,15 +658,20 @@ button:hover .button__icon-svg--copy {
   --padding: 4px;
   --transition: 0.4s;
   --button-color: #101010; 
-  --highlight-color-hue: 32deg; /* Adjusted from 210deg to Orange/Lime-glow tint */
+  --highlight-color-hue: 32deg;
 
   user-select: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  
+  /* ─── ALIGNMENT METRICS SYNC ─── */
   min-width: 220px;
   min-height: 52px;
   padding: 14px 28px;
+  box-sizing: border-box;
+  /* ────────────────────────────── */
+
   font-family: inherit;
   font-size: 11px;
   font-weight: 700;
@@ -724,7 +684,6 @@ button:hover .button__icon-svg--copy {
     inset 0px 2px 2px rgba(255, 255, 255, 0.15),
     inset 0px 4px 4px rgba(255, 255, 255, 0.1),
     inset 0px 8px 8px rgba(255, 255, 255, 0.05),
-    /* drop */ 
     0px -1px 1px rgba(0, 0, 0, 0.02),
     0px -4px 4px rgba(0, 0, 0, 0.05),
     0px -16px 16px rgba(0, 0, 0, 0.08);
@@ -733,7 +692,6 @@ button:hover .button__icon-svg--copy {
   border-radius: var(--border-radius);
   cursor: pointer;
   position: relative;
-
   transition:
     box-shadow var(--transition),
     border var(--transition),
@@ -779,7 +737,6 @@ button:hover .button__icon-svg--copy {
   transition: opacity var(--transition), filter var(--transition);
 }
 
-/* Sequential Letter Nodes Engine */
 .uiverse-dexter-wrapper .btn-letter {
   position: relative;
   display: inline-block;
@@ -808,7 +765,6 @@ button:hover .button__icon-svg--copy {
 
 @keyframes flicker { 50% { opacity: 0.3; } }
 
-/* Interactive Hover States */
 .uiverse-dexter-wrapper .btn-dexter:hover {
   border: solid 1px hsla(var(--highlight-color-hue), 100%, 80%, 40%);
 }
@@ -832,7 +788,6 @@ button:hover .button__icon-svg--copy {
   animation: none;
 }
 
-/* Focus Action States */
 .uiverse-dexter-wrapper .btn-dexter:focus::before {
   box-shadow: 0 -16px 16px -8px hsla(var(--highlight-color-hue), 100%, 70%, 20%) inset;
 }
@@ -841,14 +796,13 @@ button:hover .button__icon-svg--copy {
   filter: brightness(100%);
 }
 
-/* Active Pressed Compression Layouts */
 .uiverse-dexter-wrapper .btn-dexter:active {
   border: solid 1px hsla(var(--highlight-color-hue), 100%, 80%, 0.7);
   background-color: hsla(var(--highlight-color-hue), 50%, 20%, 0.5);
   transform: scale(0.98);
 }
 
-/* Dynamic Text Delay Mappings for "BOOK A CONSULTATION" */
+/* Dynamic Animation Timings Engine */
 .uiverse-dexter-wrapper .btn-letter:nth-child(1)  { animation-delay: 0.00s; }
 .uiverse-dexter-wrapper .btn-letter:nth-child(2)  { animation-delay: 0.05s; }
 .uiverse-dexter-wrapper .btn-letter:nth-child(3)  { animation-delay: 0.10s; }
