@@ -164,7 +164,7 @@ export default function Hero({ onScrollToSection }) {
                 {/* Simulated Video Content */}
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 to-blue-900/40 mix-blend-overlay" />
                 <video
-                src="https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212576/Firefly_Ultra-realistic_cinematic_home_office_workspace_young_freelance_video_editor_working_on_a_h_1_qquldd.mp4"
+                src="https://res.cloudinary.com/dtw1xyztu/video/upload/q_auto,f_auto/v1782212576/Firefly_Ultra-realistic_cinematic_home_office_workspace_young_freelance_video_editor_working_on_a_h_1_qquldd.mp4"
                   autoPlay
                   loop
                   muted
@@ -404,7 +404,7 @@ export default function Hero({ onScrollToSection }) {
                         {/* Simulated Waveform */}
                         <div className="w-full h-full flex items-center justify-around px-1 opacity-50">
                           {Array.from({ length: 40 }).map((_, i) => (
-                            <div key={i} className="w-[1.5px] bg-emerald-300 rounded-full" style={{ height: `${Math.max(10, Math.random() * 90)}%` }} />
+                            <div key={i} className="w-[1.5px] bg-emerald-300 rounded-full" style={{ height: `${Math.max(10, ((i * 13) % 90))}%` }} />
                           ))}
                         </div>
                         <span className="absolute left-2 text-[9px] text-emerald-100 font-medium bg-black/40 px-1 rounded truncate">A_Cam_Audio.wav</span>
@@ -419,7 +419,7 @@ export default function Hero({ onScrollToSection }) {
                         {/* Simulated Waveform */}
                         <div className="w-full h-full flex items-center justify-around px-1 opacity-50">
                           {Array.from({ length: 30 }).map((_, i) => (
-                            <div key={i} className="w-[1.5px] bg-emerald-300 rounded-full" style={{ height: `${Math.max(10, Math.random() * 90)}%` }} />
+                            <div key={i} className="w-[1.5px] bg-emerald-300 rounded-full" style={{ height: `${Math.max(10, ((i * 17) % 90))}%` }} />
                           ))}
                         </div>
                       </motion.div>

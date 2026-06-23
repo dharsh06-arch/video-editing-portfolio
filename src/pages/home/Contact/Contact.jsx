@@ -152,7 +152,7 @@ export default function Contact() {
           <div className="relative z-10 w-full max-w-[290px] sm:max-w-[320px] md:max-w-[340px] lg:max-w-[360px] flex justify-center lg:mr-4">
             <PhoneMockup
               backCards={[]}
-              playlist={["https://res.cloudinary.com/dtw1xyztu/video/upload/v1782212545/Hashtag_creators_academy_2nd_video_before_and_after_lowbitrate_1_dzftah.mp4"]}
+              playlist={["https://res.cloudinary.com/dtw1xyztu/video/upload/q_auto,f_auto/v1782212545/Hashtag_creators_academy_2nd_video_before_and_after_lowbitrate_1_dzftah.mp4"]}
               songNames={["FUSION_JAPAN.MP4"]}
             />
           </div>

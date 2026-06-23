@@ -137,10 +137,10 @@ export default function Aurora(props) {
       if (!ctn) return;
       const width = ctn.offsetWidth;
       const height = ctn.offsetHeight;
-      // Downsample by a factor of 3 for massive performance boost
+      // Downsample by a factor of 10 for massive performance boost
       // The CSS width/height ensures it scales back up
       const dpr = window.devicePixelRatio || 1;
-      const scale = 0.33 * dpr; 
+      const scale = 0.1 * dpr; 
       renderer.setSize(width * scale, height * scale);
       gl.canvas.style.width = '100%';
       gl.canvas.style.height = '100%';

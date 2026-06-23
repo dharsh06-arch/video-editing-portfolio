@@ -2,6 +2,7 @@
 
 import { NoiseTexture } from "@/components/ui/NoiseTexture";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const workflowSteps = [
   {
@@ -86,7 +87,7 @@ export default function HowItWorks() {
               key={idx}
               initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="relative w-full max-w-[900px] h-auto md:h-[320px] bg-[#030105] rounded-xl overflow-hidden flex flex-col md:flex-row shadow-[0_0_30px_rgba(0,0,0,0.8)] border border-white/5"
             >
@@ -116,11 +117,12 @@ export default function HowItWorks() {
                 {/* Blend gradient on mobile */}
                 <div className="block md:hidden absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#030105] to-transparent z-10" />
 
-                <img
+                <Image
                   src={step.image}
                   alt={step.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover opacity-80"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover opacity-80"
                 />
               </div>
             </motion.div>

@@ -44,16 +44,8 @@ export default function Home() {
       }
     });
 
-    const handleScroll = () => {
-      if (window.scrollY < 100) {
-        setActiveSection("home");
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
