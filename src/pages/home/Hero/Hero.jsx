@@ -128,7 +128,7 @@ export default function Hero({ onScrollToSection }) {
               </button>
             </div>
             <div className="w-full sm:w-auto flex justify-center">
-              <CallButn />
+              <CallButn onScrollToSection={onScrollToSection} />
             </div>
           </div>
         </motion.div>
