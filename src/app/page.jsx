@@ -11,6 +11,7 @@ import Projects from "@/pages/home/Projects/Projects";
 import Testimonials from "@/pages/home/Testimonials/Testimonials";
 import HowItWorks from "@/pages/home/HowItWorks/HowItWorks";
 import Contact from "@/pages/home/Contact/Contact";
+import SplashCursor from "@/components/ui/SplashCursor";
 import { NoiseTexture } from "@/components/ui/NoiseTexture";
 // Dynamically load Aurora component to avoid SSR build errors
 const Aurora = dynamic(() => import("@/components/shared/Aurora"), { ssr: false });
@@ -19,7 +20,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const sections = ["home", "about", "services", "projects", "how-it-works", "testimonials"];
+    const sections = ["home", "about", "services", "projects", "how-it-works", "testimonials", "contact"];
 
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
@@ -50,9 +51,10 @@ export default function Home() {
   }, []);
 
   const scrollToSection = (id) => {
+    setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
@@ -69,7 +71,7 @@ export default function Home() {
       />
 
       {/* Premium WebGL Fluid cursor effect */}
-      {/* <SplashCursor /> */}
+      <SplashCursor />
 
       {/* Global drifting green aurora background */}
       <div className="fixed inset-0 z-0 w-full h-full opacity-40 pointer-events-none">

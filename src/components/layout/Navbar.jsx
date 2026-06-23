@@ -33,7 +33,10 @@ export default function Navbar({ onScrollToSection, activeSection = "projects" }
     { id: "contact", label: "Book a Call" }, 
   ];
 
-  const handleNavigation = (id) => {
+  const handleNavigation = (event, id) => {
+    if (event && event.preventDefault) {
+      event.preventDefault();
+    }
     if (onScrollToSection) {
       onScrollToSection(id);
     }
@@ -64,8 +67,9 @@ export default function Navbar({ onScrollToSection, activeSection = "projects" }
                     />
                   )}
                   
-                  <button
-                    onClick={() => handleNavigation("contact")}
+                  <a
+                    href="#contact"
+                    onClick={(event) => handleNavigation(event, "contact")}
                     className="premium-call-btn relative font-medium text-[11px] tracking-widest uppercase select-none"
                   >
                     <div className="premium-call-blob" />
@@ -77,16 +81,17 @@ export default function Navbar({ onScrollToSection, activeSection = "projects" }
                         />
                       </span>
                     </div>
-                  </button>
+                  </a>
                 </div>
               );
             }
 
             // Render normal text navigation items
             return (
-              <button
+              <a
                 key={item.id}
-                onClick={() => handleNavigation(item.id)}
+                href={`#${item.id}`}
+                onClick={(event) => handleNavigation(event, item.id)}
                 className={`relative font-medium text-[11px] tracking-widest transition-all duration-300 uppercase select-none py-2 ${
                   isActive 
                     ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]" 
@@ -102,7 +107,7 @@ export default function Navbar({ onScrollToSection, activeSection = "projects" }
                   />
                 )}
                 {item.label}
-              </button>
+              </a>
             );
           })}
         </div>

@@ -73,18 +73,23 @@ export default function Footer() {
 
         {/* Middle: Navigation */}
         <nav className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-x-8 gap-y-2 md:gap-y-3 mb-8 md:mb-12 text-xs md:text-sm font-medium text-[#8a8f8b] border-b border-white/5 pb-6 md:pb-8">
-          {["Home", "About", "Projects", "Services", "Review", "Contact"].map(
-            (name) => (
-              <Link
-                key={name}
-                href={`#${name.toLowerCase()}`}
-                className="hover:text-white transition-colors duration-300 relative group"
-              >
-                {name}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#f59e0b] group-hover:w-full transition-all duration-300" />
-              </Link>
-            ),
-          )}
+          {[
+            { label: "Home", href: "#home" },
+            { label: "About", href: "#about" },
+            { label: "Projects", href: "#projects" },
+            { label: "Services", href: "#services" },
+            { label: "Reviews", href: "#testimonials" },
+            { label: "Contact", href: "#contact" },
+          ].map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="hover:text-white transition-colors duration-300 relative group"
+            >
+              {link.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#f59e0b] group-hover:w-full transition-all duration-300" />
+            </Link>
+          ))}
         </nav>
 
         {/* Bottom: Contact + Social */}
