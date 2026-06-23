@@ -24,13 +24,7 @@ export default function Contact() {
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none z-0" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
 
-      <NoiseTexture
-        frequency={0.65}
-        octaves={5}
-        slope={0.75}
-        noiseOpacity={0.35}
-        className=""
-      />
+
 
       <div className="absolute top-1/2 left-[40%] -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-amber-600/20 rounded-full blur-[150px] pointer-events-none z-0" />
 

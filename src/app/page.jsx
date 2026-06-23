@@ -11,8 +11,7 @@ import Projects from "@/pages/home/Projects/Projects";
 import Testimonials from "@/pages/home/Testimonials/Testimonials";
 import HowItWorks from "@/pages/home/HowItWorks/HowItWorks";
 import Contact from "@/pages/home/Contact/Contact";
-import SplashCursor from "@/components/ui/SplashCursor";
-
+import { NoiseTexture } from "@/components/ui/NoiseTexture";
 // Dynamically load Aurora component to avoid SSR build errors
 const Aurora = dynamic(() => import("@/components/shared/Aurora"), { ssr: false });
 
@@ -68,8 +67,17 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden select-none">
       
+      {/* Global Noise Overlay (Single instance for massive performance boost) */}
+      <NoiseTexture
+        ffrequency={0.65}
+        octaves={5}
+        slope={0.75}
+        noiseOpacity={0.35}
+        className=""
+      />
+
       {/* Premium WebGL Fluid cursor effect */}
-      <SplashCursor />
+      {/* <SplashCursor /> */}
 
       {/* Global drifting green aurora background */}
       <div className="fixed inset-0 z-0 w-full h-full opacity-40 pointer-events-none">

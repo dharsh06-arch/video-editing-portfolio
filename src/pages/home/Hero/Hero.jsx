@@ -62,14 +62,6 @@ export default function Hero({ onScrollToSection }) {
         {/* Ambient bottom glow */}
         <div className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vh] bg-blue-900/10 rounded-full blur-[120px]" />
 
-        <NoiseTexture
-          frequency={0.65}
-          octaves={5}
-          slope={0.75}
-          noiseOpacity={0.35}
-          className=""
-        />
-
         {/* Prominent grid pattern for "workspace" feel */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_60%,transparent_100%)]" />
       </div>
@@ -383,7 +375,7 @@ export default function Hero({ onScrollToSection }) {
                       >
                         {/* Fake thumbnails inside clip */}
                         <div className="absolute inset-y-0 left-0 w-8 bg-black/20 border-r border-blue-400/20 flex items-center justify-center">
-                          <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=50&h=30&fit=crop" alt="" className="opacity-50 h-full w-full object-cover" />
+                          <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=50&h=30&fit=crop" alt="" className="opacity-50 h-full w-full object-cover" />
                         </div>
                         <span className="text-[10px] text-white font-medium ml-10 truncate z-10 drop-shadow-md">A_Cam_Interview.braw</span>
                       </motion.div>

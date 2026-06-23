@@ -98,6 +98,7 @@ export default function PhoneMockup({
               <img
                 src={card.imageUrl}
                 alt="Stacked background clip"
+                loading="lazy"
                 className="w-full h-full object-cover filter brightness-75"
               />
               <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 to-transparent">

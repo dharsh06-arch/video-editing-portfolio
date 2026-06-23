@@ -44,13 +44,7 @@ export default function HowItWorks() {
         <div className="absolute inset-0 bg-[#050806] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       </div>
 
-      <NoiseTexture
-        frequency={0.65}
-        octaves={5}
-        slope={0.75}
-        noiseOpacity={0.35}
-        className=""
-      />
+
 
       {/* Background Ambience */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -125,6 +119,7 @@ export default function HowItWorks() {
                 <img
                   src={step.image}
                   alt={step.title}
+                  loading="lazy"
                   className="w-full h-full object-cover opacity-80"
                 />
               </div>

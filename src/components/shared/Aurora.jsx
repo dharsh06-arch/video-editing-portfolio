@@ -137,9 +137,15 @@ export default function Aurora(props) {
       if (!ctn) return;
       const width = ctn.offsetWidth;
       const height = ctn.offsetHeight;
-      renderer.setSize(width, height);
+      // Downsample by a factor of 3 for massive performance boost
+      // The CSS width/height ensures it scales back up
+      const dpr = window.devicePixelRatio || 1;
+      const scale = 0.33 * dpr; 
+      renderer.setSize(width * scale, height * scale);
+      gl.canvas.style.width = '100%';
+      gl.canvas.style.height = '100%';
       if (program) {
-        program.uniforms.uResolution.value = [width, height];
+        program.uniforms.uResolution.value = [width * scale, height * scale];
       }
     }
     window.addEventListener('resize', resize);
