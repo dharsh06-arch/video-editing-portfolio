@@ -70,7 +70,7 @@ export default function Navbar({ onScrollToSection, activeSection = "projects" }
                   <a
                     href="#contact"
                     onClick={(event) => handleNavigation(event, "contact")}
-                    className="premium-call-btn relative font-medium text-[11px] tracking-widest uppercase select-none"
+                    className="premium-call-btn relative font-medium text-[11px] tracking-widest uppercase select-none cursor-pointer"
                   >
                     <div className="premium-call-blob" />
                     <div className="premium-call-inner">
@@ -92,7 +92,7 @@ export default function Navbar({ onScrollToSection, activeSection = "projects" }
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={(event) => handleNavigation(event, item.id)}
-                className={`relative font-medium text-[11px] tracking-widest transition-all duration-300 uppercase select-none py-2 ${
+                className={`relative font-medium cursor-pointer text-[11px] tracking-widest  transition-all duration-300 uppercase py-2 select-none ${
                   isActive 
                     ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]" 
                     : "text-neutral-400 hover:text-neutral-200"
@@ -115,7 +115,7 @@ export default function Navbar({ onScrollToSection, activeSection = "projects" }
         {/* Mobile Navbar Elements */}
         <div className="md:hidden flex items-center w-full justify-between py-1.5">
           <span className="text-white font-bold text-xs tracking-widest uppercase">Menu</span>
-          <button onClick={() => setIsOpen(!isOpen)} className="text-neutral-400 hover:text-white p-1 focus:outline-none">
+          <button onClick={() => setIsOpen(!isOpen)} className="text-neutral-400 hover:text-white p-1 focus:outline-none cursor-pointer">
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
@@ -137,8 +137,8 @@ export default function Navbar({ onScrollToSection, activeSection = "projects" }
                 return (
                   <button
                     key={item.id}
-                    onClick={() => handleNavigation(item.id)}
-                    className={`text-left font-medium text-sm px-4 py-3 rounded-xl transition-colors uppercase tracking-widest ${
+                    onClick={() => handleNavigation(null, item.id)}
+                    className={`text-left font-medium text-sm px-4 py-3 rounded-xl transition-colors uppercase tracking-widest cursor-pointer select-none ${
                       activeSection === item.id
                         ? "bg-neutral-900 text-white font-semibold border-l-2 border-white"
                         : "text-neutral-400 hover:bg-neutral-900/50 hover:text-white"
