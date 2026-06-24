@@ -85,10 +85,11 @@ export default function HowItWorks() {
           {workflowSteps.map((step, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+              initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              style={{ willChange: 'transform, opacity' }}
               className="relative w-full max-w-[900px] h-auto md:h-[320px] bg-[#030105] rounded-xl overflow-hidden flex flex-col md:flex-row shadow-[0_0_30px_rgba(0,0,0,0.8)] border border-white/5"
             >
               {/* Text Side (Left) */}

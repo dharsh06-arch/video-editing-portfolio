@@ -18,7 +18,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative z-20 py-16 md:py-24 px-6 md:px-12 lg:px-24 bg-black overflow-hidden border-t border-amber-500/10"
+      className="relative z-20 py-2 md:py-24 px-6 md:px-12 lg:px-24 bg-black overflow-hidden border-t border-amber-500/10"
     >
       {/* Background Grid & Glow */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none z-0" />
