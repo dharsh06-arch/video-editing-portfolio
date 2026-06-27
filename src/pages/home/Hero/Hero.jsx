@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { Play, Pause, SkipBack, SkipForward, Scissors, Monitor, Layers, Volume2, Maximize, MousePointer2, Star } from "lucide-react";
 import { NoiseTexture } from "@/components/ui/NoiseTexture";
@@ -10,6 +10,7 @@ import { AvatarCircles } from "@/components/ui/AvatarCircles";
 export default function Hero({ onScrollToSection }) {
   const [isPlaying, setIsPlaying] = useState(true);
   const controls = useAnimation();
+  const videoRef = useRef(null);
 
   useEffect(() => {
     if (isPlaying) {
@@ -21,6 +22,25 @@ export default function Hero({ onScrollToSection }) {
       controls.stop();
     }
   }, [isPlaying, controls]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) return;
+
+    const startPlayback = async () => {
+      try {
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        await video.play();
+      } catch (error) {
+        console.warn("Hero video autoplay failed:", error);
+      }
+    };
+
+    startPlayback();
+  }, []);
 
  const MOCK_AVATARS = [
   { 
@@ -68,7 +88,6 @@ export default function Hero({ onScrollToSection }) {
 
       {/* Main Content Area */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 pt-12 sm:pt-20 pb-10 flex flex-col items-center">
-
         {/* Typography */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -81,38 +100,42 @@ export default function Hero({ onScrollToSection }) {
             <span className="text-gradient-green">Masterpieces.</span>
           </h1>
 
-
           <p className="text-white/60 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed mb-10 font-light">
-            We transform raw footage into compelling narratives. Expert video editing, color grading, and visual effects that command attention.
+            We transform raw footage into compelling narratives. Expert video
+            editing, color grading, and visual effects that command attention.
           </p>
-       <motion.div
-  initial={{ opacity: 0, y: 15 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.05 }}
-  className="flex flex-col sm:flex-row items-center justify-center mt-2 md:mt-4 mb-6 gap-3"
->
-  <AvatarCircles avatarUrls={MOCK_AVATARS} numPeople={"50+"} />
-  
-  <div className="flex flex-col sm:flex-row items-center gap-2">
-    {/* Premium 5-Star Rating */}
-    <div className="flex items-center gap-0.5">
-      {[...Array(5)].map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.05 + i * 0.05, type: "spring", stiffness: 300 }}
-        >
-          <Star className="w-4.5 h-4.5 text-amber-400 fill-amber-400 [filter:drop-shadow(0_0_3px_rgba(251,191,36,0.3))] transition-transform hover:scale-110 cursor-default" />
-        </motion.div>
-      ))}
-    </div>
-    
-    <span className="text-sm text-white/60 font-medium">
-      Trusted by 100+ creators
-    </span>
-  </div>
-</motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="flex flex-col sm:flex-row items-center justify-center mt-2 md:mt-4 mb-6 gap-3"
+          >
+            <AvatarCircles avatarUrls={MOCK_AVATARS} numPeople={"50+"} />
+
+            <div className="flex flex-col sm:flex-row items-center gap-2">
+              {/* Premium 5-Star Rating */}
+              <div className="flex items-center gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      delay: 0.05 + i * 0.05,
+                      type: "spring",
+                      stiffness: 300,
+                    }}
+                  >
+                    <Star className="w-4.5 h-4.5 text-amber-400 fill-amber-400 [filter:drop-shadow(0_0_3px_rgba(251,191,36,0.3))] transition-transform hover:scale-110 cursor-default" />
+                  </motion.div>
+                ))}
+              </div>
+
+              <span className="text-sm text-white/60 font-medium">
+                Trusted by 100+ creators
+              </span>
+            </div>
+          </motion.div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-3xl">
             <div className="uiverse-glass-wrap w-full sm:w-auto flex justify-center">
@@ -148,7 +171,9 @@ export default function Hero({ onScrollToSection }) {
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                 <div className="w-3 h-3 rounded-full bg-green-500/80" />
               </div>
-              <span className="ml-4 text-xs font-medium text-white/40">Portfolio_Main_Edit_v3.prproj</span>
+              <span className="ml-4 text-xs font-medium text-white/40">
+                Portfolio_Main_Edit_v3.prproj
+              </span>
             </div>
             <div className="flex items-center gap-4 text-white/40">
               <Monitor className="w-4 h-4 cursor-pointer hover:text-white transition-colors" />
@@ -164,11 +189,12 @@ export default function Hero({ onScrollToSection }) {
                 {/* Simulated Video Content */}
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 to-blue-900/40 mix-blend-overlay" />
                 <video
-                src="https://res.cloudinary.com/dtw1xyztu/video/upload/q_auto,f_auto/v1782212576/Firefly_Ultra-realistic_cinematic_home_office_workspace_young_freelance_video_editor_working_on_a_h_1_qquldd.mp4"
-                  autoPlay
+                  ref={videoRef}
+                  src="https://res.cloudinary.com/dtw1xyztu/video/upload/v1782546154/WhatsApp_Video_2026-06-26_at_2.20.35_PM_mdngkv.mp4"
                   loop
                   muted
                   playsInline
+                  preload="auto"
                   className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
 
@@ -184,7 +210,9 @@ export default function Hero({ onScrollToSection }) {
 
                 {/* Video Controls Overlay */}
                 <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-black/80 to-transparent flex items-end px-3 pb-2 justify-between">
-                  <div className="text-[10px] font-mono text-white/70">00:01:24:12</div>
+                  <div className="text-[10px] font-mono text-white/70">
+                    00:01:24:12
+                  </div>
                   <div className="flex items-center gap-2">
                     <Volume2 className="w-3 h-3 text-white/70" />
                     <Maximize className="w-3 h-3 text-white/70" />
@@ -204,7 +232,7 @@ export default function Hero({ onScrollToSection }) {
                   { label: "Exposure", val: "75%" },
                   { label: "Contrast", val: "60%" },
                   { label: "Highlights", val: "45%" },
-                  { label: "Shadows", val: "80%" }
+                  { label: "Shadows", val: "80%" },
                 ].map((item, i) => (
                   <div key={i} className="flex flex-col gap-1.5">
                     <div className="flex justify-between text-[10px] text-white/50 font-medium">
@@ -230,15 +258,25 @@ export default function Hero({ onScrollToSection }) {
                 <div className="mt-2 grid grid-cols-2 gap-4">
                   <div className="flex flex-col items-center gap-2">
                     <div className="w-16 h-16 rounded-full border-[3px] border-gradient-to-br from-amber-500 via-green-500 to-blue-500 relative bg-[#1a1a1a]">
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.8)]" style={{ transform: "translate(-30%, -60%)" }} />
+                      <div
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.8)]"
+                        style={{ transform: "translate(-30%, -60%)" }}
+                      />
                     </div>
-                    <span className="text-[9px] text-white/40 uppercase">Midtones</span>
+                    <span className="text-[9px] text-white/40 uppercase">
+                      Midtones
+                    </span>
                   </div>
                   <div className="flex flex-col items-center gap-2">
                     <div className="w-16 h-16 rounded-full border-[3px] border-gradient-to-br from-yellow-500 via-cyan-500 to-amber-500 relative bg-[#1a1a1a]">
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.8)]" style={{ transform: "translate(40%, 20%)" }} />
+                      <div
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_5px_rgba(255,255,255,0.8)]"
+                        style={{ transform: "translate(40%, 20%)" }}
+                      />
                     </div>
-                    <span className="text-[9px] text-white/40 uppercase">Shadows</span>
+                    <span className="text-[9px] text-white/40 uppercase">
+                      Shadows
+                    </span>
                   </div>
                 </div>
               </div>
@@ -247,7 +285,6 @@ export default function Hero({ onScrollToSection }) {
 
           {/* Timeline Section (Bottom) */}
           <div className="h-[250px] bg-[#141414] flex flex-col border-t border-white/10 relative">
-
             {/* Timeline Toolbar */}
             <div className="h-9 border-b border-white/5 flex items-center px-4 justify-between bg-[#111]">
               <div className="flex items-center gap-3">
@@ -258,12 +295,21 @@ export default function Hero({ onScrollToSection }) {
                 <div className="w-px h-4 bg-white/10 mx-1" />
                 <div className="flex items-center gap-2">
                   <SkipBack className="w-3.5 h-3.5 text-white/50 hover:text-white cursor-pointer" />
-                  <button onClick={() => setIsPlaying(!isPlaying)} className="w-5 h-5 rounded-sm bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
-                    {isPlaying ? <Pause className="w-3 h-3 text-white" /> : <Play className="w-3 h-3 text-white ml-0.5" />}
+                  <button
+                    onClick={() => setIsPlaying(!isPlaying)}
+                    className="w-5 h-5 rounded-sm bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                  >
+                    {isPlaying ? (
+                      <Pause className="w-3 h-3 text-white" />
+                    ) : (
+                      <Play className="w-3 h-3 text-white ml-0.5" />
+                    )}
                   </button>
                   <SkipForward className="w-3 h-3 text-white/50 hover:text-white cursor-pointer" />
                 </div>
-                <span className="text-[10px] font-mono text-amber-400 ml-2 bg-amber-500/10 px-1.5 py-0.5 rounded">00:01:24:12</span>
+                <span className="text-[10px] font-mono text-amber-400 ml-2 bg-amber-500/10 px-1.5 py-0.5 rounded">
+                  00:01:24:12
+                </span>
               </div>
 
               <div className="hidden sm:flex items-center gap-1">
@@ -275,38 +321,46 @@ export default function Hero({ onScrollToSection }) {
 
             {/* Tracks Area */}
             <div className="flex-1 overflow-hidden relative flex">
-
               {/* Track Headers (Left sidebar) */}
               <div className="w-[80px] sm:w-[120px] bg-[#1a1a1a] border-r border-white/10 flex flex-col z-10 shrink-0">
-                <div className="h-6 border-b border-white/5" /> {/* Timecode header spacer */}
-
+                <div className="h-6 border-b border-white/5" />{" "}
+                {/* Timecode header spacer */}
                 {/* V3 */}
                 <div className="h-[40px] border-b border-white/5 flex items-center px-2 group">
-                  <span className="text-[10px] font-bold text-white/30 group-hover:text-white/70 transition-colors">V3</span>
+                  <span className="text-[10px] font-bold text-white/30 group-hover:text-white/70 transition-colors">
+                    V3
+                  </span>
                 </div>
                 {/* V2 */}
                 <div className="h-[40px] border-b border-white/5 flex items-center px-2 group">
-                  <span className="text-[10px] font-bold text-white/30 group-hover:text-white/70 transition-colors">V2</span>
+                  <span className="text-[10px] font-bold text-white/30 group-hover:text-white/70 transition-colors">
+                    V2
+                  </span>
                 </div>
                 {/* V1 */}
                 <div className="h-[50px] border-b border-white/5 flex items-center px-2 bg-white/[0.02] group">
-                  <span className="text-[10px] font-bold text-blue-400/50 group-hover:text-blue-400 transition-colors">V1</span>
+                  <span className="text-[10px] font-bold text-blue-400/50 group-hover:text-blue-400 transition-colors">
+                    V1
+                  </span>
                 </div>
-
                 {/* A1 */}
                 <div className="h-[40px] border-b border-white/5 flex items-center px-2 mt-1 group">
-                  <span className="text-[10px] font-bold text-green-400/50 group-hover:text-green-400 transition-colors">A1</span>
+                  <span className="text-[10px] font-bold text-green-400/50 group-hover:text-green-400 transition-colors">
+                    A1
+                  </span>
                 </div>
               </div>
 
               {/* Tracks Content */}
               <div className="flex-1 relative bg-[#0f0f0f] overflow-x-hidden group/timeline">
-
                 {/* Timecode Ruler */}
                 <div className="h-6 border-b border-white/5 bg-[#141414] flex items-end px-2 whitespace-nowrap overflow-hidden">
                   <div className="w-[150%] h-full flex items-end opacity-40">
                     {Array.from({ length: 40 }).map((_, i) => (
-                      <div key={i} className="flex-1 flex flex-col items-start h-full justify-end border-l border-white/20 pl-0.5">
+                      <div
+                        key={i}
+                        className="flex-1 flex flex-col items-start h-full justify-end border-l border-white/20 pl-0.5"
+                      >
                         <span className="text-[8px] text-white/60 mb-0.5 select-none">{`00:0${Math.floor(i / 10)}:0${i % 10}:00`}</span>
                       </div>
                     ))}
@@ -317,7 +371,10 @@ export default function Hero({ onScrollToSection }) {
                 <div className="absolute top-6 bottom-0 left-0 w-[150%] flex">
                   {/* Grid lines */}
                   {Array.from({ length: 40 }).map((_, i) => (
-                    <div key={i} className="flex-1 border-l border-white/[0.02] h-full" />
+                    <div
+                      key={i}
+                      className="flex-1 border-l border-white/[0.02] h-full"
+                    />
                   ))}
 
                   {/* Playhead Line */}
@@ -341,7 +398,9 @@ export default function Hero({ onScrollToSection }) {
                         transition={{ duration: 0.5, delay: 0.8 }}
                         className="absolute left-[15%] h-[26px] bg-pink-500/30 border border-pink-400/50 rounded-sm flex items-center px-2 overflow-hidden hover:bg-pink-500/40 cursor-pointer transition-colors"
                       >
-                        <span className="text-[9px] text-pink-200 font-medium whitespace-nowrap truncate">Text: Cinematic Intro</span>
+                        <span className="text-[9px] text-pink-200 font-medium whitespace-nowrap truncate">
+                          Text: Cinematic Intro
+                        </span>
                       </motion.div>
                     </div>
 
@@ -353,7 +412,9 @@ export default function Hero({ onScrollToSection }) {
                         transition={{ duration: 0.4, delay: 1 }}
                         className="absolute left-[25%] w-[18%] h-[26px] bg-cyan-600/30 border border-cyan-400/50 rounded-sm flex items-center px-2 overflow-hidden hover:bg-cyan-600/40 cursor-pointer origin-bottom"
                       >
-                        <span className="text-[9px] text-cyan-200 font-medium truncate">B-Roll_Drone_01.mp4</span>
+                        <span className="text-[9px] text-cyan-200 font-medium truncate">
+                          B-Roll_Drone_01.mp4
+                        </span>
                       </motion.div>
                       <motion.div
                         initial={{ opacity: 0, scaleY: 0 }}
@@ -361,7 +422,9 @@ export default function Hero({ onScrollToSection }) {
                         transition={{ duration: 0.4, delay: 1.2 }}
                         className="absolute left-[50%] w-[15%] h-[26px] bg-cyan-600/30 border border-cyan-400/50 rounded-sm flex items-center px-2 overflow-hidden hover:bg-cyan-600/40 cursor-pointer origin-bottom"
                       >
-                        <span className="text-[9px] text-cyan-200 font-medium truncate">LightLeak_Overlay</span>
+                        <span className="text-[9px] text-cyan-200 font-medium truncate">
+                          LightLeak_Overlay
+                        </span>
                       </motion.div>
                     </div>
 
@@ -375,9 +438,15 @@ export default function Hero({ onScrollToSection }) {
                       >
                         {/* Fake thumbnails inside clip */}
                         <div className="absolute inset-y-0 left-0 w-8 bg-black/20 border-r border-blue-400/20 flex items-center justify-center">
-                          <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=50&h=30&fit=crop" alt="" className="opacity-50 h-full w-full object-cover" />
+                          <img
+                            src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=50&h=30&fit=crop"
+                            alt=""
+                            className="opacity-50 h-full w-full object-cover"
+                          />
                         </div>
-                        <span className="text-[10px] text-white font-medium ml-10 truncate z-10 drop-shadow-md">A_Cam_Interview.braw</span>
+                        <span className="text-[10px] text-white font-medium ml-10 truncate z-10 drop-shadow-md">
+                          A_Cam_Interview.braw
+                        </span>
                       </motion.div>
 
                       <motion.div
@@ -387,9 +456,15 @@ export default function Hero({ onScrollToSection }) {
                         className="absolute left-[41%] w-[25%] h-[34px] bg-blue-600/40 border border-blue-400/60 rounded-sm flex items-center px-2 overflow-hidden shadow-sm hover:bg-blue-600/50 cursor-pointer"
                       >
                         <div className="absolute inset-y-0 left-0 w-8 bg-black/20 border-r border-blue-400/20 flex items-center justify-center">
-                          <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=50&h=30&fit=crop" alt="" className="opacity-50 h-full w-full object-cover" />
+                          <img
+                            src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=50&h=30&fit=crop"
+                            alt=""
+                            className="opacity-50 h-full w-full object-cover"
+                          />
                         </div>
-                        <span className="text-[10px] text-white font-medium ml-10 truncate z-10 drop-shadow-md">A_Cam_Action.braw</span>
+                        <span className="text-[10px] text-white font-medium ml-10 truncate z-10 drop-shadow-md">
+                          A_Cam_Action.braw
+                        </span>
                       </motion.div>
                     </div>
 
@@ -404,10 +479,18 @@ export default function Hero({ onScrollToSection }) {
                         {/* Simulated Waveform */}
                         <div className="w-full h-full flex items-center justify-around px-1 opacity-50">
                           {Array.from({ length: 40 }).map((_, i) => (
-                            <div key={i} className="w-[1.5px] bg-emerald-300 rounded-full" style={{ height: `${Math.max(10, ((i * 13) % 90))}%` }} />
+                            <div
+                              key={i}
+                              className="w-[1.5px] bg-emerald-300 rounded-full"
+                              style={{
+                                height: `${Math.max(10, (i * 13) % 90)}%`,
+                              }}
+                            />
                           ))}
                         </div>
-                        <span className="absolute left-2 text-[9px] text-emerald-100 font-medium bg-black/40 px-1 rounded truncate">A_Cam_Audio.wav</span>
+                        <span className="absolute left-2 text-[9px] text-emerald-100 font-medium bg-black/40 px-1 rounded truncate">
+                          A_Cam_Audio.wav
+                        </span>
                       </motion.div>
 
                       <motion.div
@@ -419,19 +502,23 @@ export default function Hero({ onScrollToSection }) {
                         {/* Simulated Waveform */}
                         <div className="w-full h-full flex items-center justify-around px-1 opacity-50">
                           {Array.from({ length: 30 }).map((_, i) => (
-                            <div key={i} className="w-[1.5px] bg-emerald-300 rounded-full" style={{ height: `${Math.max(10, ((i * 17) % 90))}%` }} />
+                            <div
+                              key={i}
+                              className="w-[1.5px] bg-emerald-300 rounded-full"
+                              style={{
+                                height: `${Math.max(10, (i * 17) % 90)}%`,
+                              }}
+                            />
                           ))}
                         </div>
                       </motion.div>
                     </div>
-
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
-
       </div>
     </section>
   );

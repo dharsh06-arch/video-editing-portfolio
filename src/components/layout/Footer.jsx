@@ -9,7 +9,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative z-20 w-full bg-[#0a0a0a] px-4 sm:px-6 md:px-14 py-8 md:py-16 overflow-hidden">
+    <footer className="relative z-20 w-full bg-[#362828] px-4 sm:px-6 md:px-14 py-8 md:py-16 overflow-hidden">
       {/* Aurora Background - Full coverage */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
         <Aurora
