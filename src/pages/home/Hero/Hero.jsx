@@ -198,12 +198,7 @@ export default function Hero({ onScrollToSection }) {
                   className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
 
-                {/* Center Play Button Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center border border-white/20 cursor-pointer hover:bg-black/60 hover:scale-110 transition-all group-hover:opacity-100 lg:opacity-0">
-                    <Play className="w-6 h-6 text-white ml-1 fill-white" />
-                  </div>
-                </div>
+               
 
                 {/* Safe Margins */}
                 <div className="absolute inset-6 border border-white/20 border-dashed rounded-sm pointer-events-none opacity-30" />
