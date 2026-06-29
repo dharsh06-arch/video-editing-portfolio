@@ -119,9 +119,12 @@ export default function Aurora(props) {
     speed = 0.8,
   } = props;
   const propsRef = useRef(props);
-  propsRef.current = props;
 
   const ctnDom = useRef(null);
+
+  useEffect(() => {
+    propsRef.current = props;
+  }, [props]);
 
   useEffect(() => {
     const ctn = ctnDom.current;

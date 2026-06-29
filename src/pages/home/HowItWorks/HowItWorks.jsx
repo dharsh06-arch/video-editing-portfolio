@@ -8,7 +8,7 @@ const workflowSteps = [
   {
     number: "01",
     title: "Discovery call",
-    description: "I learn about your brand, goals, and content needs to make sure we're the perfect fit.",
+    description: "I learn about your brand, goals, and content needs to make sure we are the perfect fit.",
     image: "/workflow_discovery_call.png",
   },
   {
@@ -76,7 +76,7 @@ export default function HowItWorks() {
             My Workflow
           </h2>
           <p className="text-lg text-white/70 max-w-lg mx-auto leading-relaxed">
-            From first contact to final delivery, here's exactly how I handle everything.
+            From first contact to final delivery, here&apos;s exactly how I handle everything.
           </p>
         </div>
 

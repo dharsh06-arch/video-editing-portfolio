@@ -104,7 +104,7 @@ export default function Services() {
             WHY CHOOSE US?
           </h2>
           <p className="text-white/60 text-base md:text-lg max-w-2xl leading-relaxed">
-            We don't just edit videos. We build complete, high-end visual pipelines tailored to your content strategy. Discover our premium services below.
+            We don&apos;t just edit videos. We build complete, high-end visual pipelines tailored to your content strategy. Discover our premium services below.
           </p>
         </div>
 

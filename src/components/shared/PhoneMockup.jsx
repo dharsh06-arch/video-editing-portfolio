@@ -23,7 +23,6 @@ export default function PhoneMockup({
 }) {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
-  const [progress, setProgress] = useState(0);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const videoRef = useRef(null);
@@ -52,32 +51,14 @@ export default function PhoneMockup({
 
     const timer = setInterval(() => {
       setIsLoading(true);
-      // Trigger a fake loading buffer transition
       setTimeout(() => {
         setCurrentIdx((prev) => (prev + 1) % playlist.length);
         setIsLoading(false);
-        setProgress(0);
       }, 700);
     }, 6500);
 
     return () => clearInterval(timer);
   }, [playlist]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleTimeUpdate = () => {
-      if (video.duration) {
-        setProgress((video.currentTime / video.duration) * 100);
-      }
-    };
-
-    video.addEventListener("timeupdate", handleTimeUpdate);
-    return () => {
-      video.removeEventListener("timeupdate", handleTimeUpdate);
-    };
-  }, [currentIdx]);
 
   return (
     <div className="relative w-full max-w-[400px] aspect-[9/19.5] mx-auto flex items-center justify-center py-8">
@@ -135,9 +116,6 @@ export default function PhoneMockup({
               <span className="w-0.5 bg-lime animate-bounce h-1.5" style={{ animationDelay: '0.5s' }} />
             </div>
           </div>
-
-          {/* Screen Side Reflections */}
-          {/* <div className="absolute inset-0 pointer-events-none z-40 bg-gradient-to-tr from-transparent via-white/5 to-transparent mix-blend-overlay" /> */}
 
           {/* Video Player */}
           <div className="absolute inset-0 w-full h-full bg-neutral-950" onClick={togglePlay}>
@@ -220,31 +198,6 @@ export default function PhoneMockup({
                 <span className="text-[10px] text-white/85 mt-1 font-semibold">Share</span>
               </div>
             </div>
-
-            {/* Left Side Details Panel */}
-            {/* <div className="w-[80%] bg-linear-to-t from-transparent to-black text-left select-none mb-4">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-full border border-lime bg-surface overflow-hidden shrink-0 flex items-center justify-center text-[10px] font-bold text-white">
-                  V
-                </div>
-                <span className="text-xs font-bold text-white tracking-wide">@cinematic_editor</span>
-                <span className="text-[9px] bg-lime/90 text-black px-1.5 py-0.5 rounded font-black shrink-0">PRO</span>
-              </div>
-              <p className="text-[10px] text-white/90 leading-normal line-clamp-2 mb-2 font-sans">
-                Cinematic pacing, color grading, & sound design that drives high engagement. ✨🎬 #videoediting #premierepro #colorgrading
-              </p>
-              <div className="flex items-center gap-1.5 text-[9px] text-lime font-semibold uppercase tracking-wider">
-                <Music className="w-3 h-3 animate-spin" style={{ animationDuration: '6s' }} />
-              </div>
-            </div> */}
-
-            {/* Bottom Progress Bar */}
-            {/* <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden mb-1">
-              <div
-                className="h-full bg-gradient-to-r from-surface to-lime transition-all duration-100"
-                style={{ width: `${progress}%` }}
-              />
-            </div> */}
 
           </div>
 

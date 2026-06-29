@@ -2,13 +2,34 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { Play, Pause, SkipBack, SkipForward, Scissors, Monitor, Layers, Volume2, Maximize, MousePointer2, Star } from "lucide-react";
+import {
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+  Scissors,
+  Monitor,
+  Layers,
+  Volume2,
+  VolumeX,
+  Maximize,
+  MousePointer2,
+  Star,
+} from "lucide-react";
 import { NoiseTexture } from "@/components/ui/NoiseTexture";
 import CallButn from "@/components/ui/CallButn";
 import { AvatarCircles } from "@/components/ui/AvatarCircles";
 
+// IMPORTANT: filenames with spaces must be URL-encoded or some browsers/dev
+// servers will fail to fetch them reliably, causing stuck/delayed playback.
+const HERO_VIDEO_SRC = encodeURI(
+  "/WhatsApp Video 2026-06-27 at 1.37.28 PM_1.mp4",
+);
+
 export default function Hero({ onScrollToSection }) {
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const [videoReady, setVideoReady] = useState(false);
   const controls = useAnimation();
   const videoRef = useRef(null);
 
@@ -16,58 +37,106 @@ export default function Hero({ onScrollToSection }) {
     if (isPlaying) {
       controls.start({
         x: ["0%", "100%"],
-        transition: { duration: 10, ease: "linear", repeat: Infinity }
+        transition: { duration: 10, ease: "linear", repeat: Infinity },
       });
     } else {
       controls.stop();
     }
   }, [isPlaying, controls]);
 
+  // Robust autoplay: wait for the video to actually be ready instead of
+  // firing play() immediately on mount (which can silently fail / hang
+  // on slower connections or when the element hasn't buffered yet).
   useEffect(() => {
     const video = videoRef.current;
-
     if (!video) return;
 
-    const startPlayback = async () => {
+    let cancelled = false;
+
+    const tryPlay = async () => {
       try {
         video.muted = true;
         video.loop = true;
         video.playsInline = true;
         await video.play();
+        if (!cancelled) setVideoReady(true);
       } catch (error) {
         console.warn("Hero video autoplay failed:", error);
+        // Retry once the browser says it can actually play
+        const retry = () => {
+          video.play().catch(() => {});
+        };
+        video.addEventListener("canplay", retry, { once: true });
       }
     };
 
-    startPlayback();
+    if (video.readyState >= 3) {
+      // HAVE_FUTURE_DATA or better — safe to play now
+      tryPlay();
+    } else {
+      const onCanPlay = () => {
+        if (!cancelled) tryPlay();
+      };
+      video.addEventListener("canplay", onCanPlay, { once: true });
+      video.addEventListener("loadeddata", onCanPlay, { once: true });
+      // Force the browser to start loading in case preload didn't kick in
+      video.load();
+    }
+
+    // Fallback: if the video stalls/errors mid-stream, attempt to recover
+    const onStalled = () => {
+      console.warn("Hero video stalled, attempting recovery...");
+      video.load();
+      video.play().catch(() => {});
+    };
+    const onError = (e) => {
+      console.error("Hero video error:", e);
+    };
+
+    video.addEventListener("stalled", onStalled);
+    video.addEventListener("error", onError);
+
+    return () => {
+      cancelled = true;
+      video.removeEventListener("stalled", onStalled);
+      video.removeEventListener("error", onError);
+    };
   }, []);
 
- const MOCK_AVATARS = [
-  { 
-    imageUrl: "/images/Digital-toppers-academy-logo.jpg-Photoroom.png",
-    bgColor: "#E6EEC9" // Deep dark navy to contrast the blue & red "Digital Toppers" text
-  },
-  { 
-    imageUrl: "/images/kalinga-Photoroom.png",
-    bgColor: "#DCEEF1" // Clean dark gray to make the black/red Kalinga logo pop cleanly
-  },
-  { 
-    imageUrl: "/images/sakthi doc-Photoroom.png",
-    bgColor: "#0a0a0c" // Pure deep black so the bright white "SAKTHI HOSPITAL" text shines
-  },
-  { 
-    imageUrl: "/images/vlcsnap-2026-06-14-17h01m56s157-Photoroom.png",
-    bgColor: "#171717" // Neutral dark backing for the orange accent graphics
-  },
-  { 
-    imageUrl: "/images/vlcsnap-2026-06-14-17h12m41s462-Photoroom.png",
-    bgColor: "#0e1726" // Subtle blue-tinted dark base for the yellow accents
-  },
-  { 
-    imageUrl: "/images/vlcsnap-2026-06-14-17h17m42s499.png",
-    bgColor: "#ffffff" // Pure solid white to perfectly preserve that clean red logo badge
-  },
-];
+  const toggleMute = () => {
+    if (videoRef.current) {
+      const newMutedState = !videoRef.current.muted;
+      videoRef.current.muted = newMutedState;
+      setIsMuted(newMutedState);
+    }
+  };
+
+  const MOCK_AVATARS = [
+    {
+      imageUrl: "/images/Digital-toppers-academy-logo.jpg-Photoroom.png",
+      bgColor: "#E6EEC9", // Deep dark navy to contrast the blue & red "Digital Toppers" text
+    },
+    {
+      imageUrl: "/images/kalinga-Photoroom.png",
+      bgColor: "#DCEEF1", // Clean dark gray to make the black/red Kalinga logo pop cleanly
+    },
+    {
+      imageUrl: "/images/sakthi doc-Photoroom.png",
+      bgColor: "#0a0a0c", // Pure deep black so the bright white "SAKTHI HOSPITAL" text shines
+    },
+    {
+      imageUrl: "/images/vlcsnap-2026-06-14-17h01m56s157-Photoroom.png",
+      bgColor: "#171717", // Neutral dark backing for the orange accent graphics
+    },
+    {
+      imageUrl: "/images/vlcsnap-2026-06-14-17h12m41s462-Photoroom.png",
+      bgColor: "#0e1726", // Subtle blue-tinted dark base for the yellow accents
+    },
+    {
+      imageUrl: "/images/vlcsnap-2026-06-14-17h17m42s499.png",
+      bgColor: "#ffffff", // Pure solid white to perfectly preserve that clean red logo badge
+    },
+  ];
 
   return (
     <section
@@ -185,20 +254,29 @@ export default function Hero({ onScrollToSection }) {
             {/* Preview Window Area */}
             <div className="flex-1 lg:w-1/2 p-4 lg:p-6 flex flex-col border-b lg:border-b-0 lg:border-r border-white/10 bg-[#0a0a0a]">
               {/* Fake Video Player */}
-              <div className="w-full h-[200px] lg:h-full bg-black rounded-lg overflow-hidden relative border border-white/5 shadow-inner group">
+              <div className="w-full h-[200px] md:h-[280px] lg:h-full bg-black rounded-lg overflow-hidden relative border border-white/5 shadow-inner group">
                 {/* Simulated Video Content */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 to-blue-900/40 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 to-blue-900/40 mix-blend-overlay pointer-events-none z-10" />
+
+                {/* Loading state shown until the video reports it's actually playable */}
+                {!videoReady && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black z-20">
+                    <div className="w-6 h-6 border-2 border-white/20 border-t-amber-400 rounded-full animate-spin" />
+                  </div>
+                )}
+
                 <video
                   ref={videoRef}
-                  src="https://res.cloudinary.com/dtw1xyztu/video/upload/v1782546154/WhatsApp_Video_2026-06-26_at_2.20.35_PM_mdngkv.mp4"
+                  src={HERO_VIDEO_SRC}
                   loop
-                  muted
+                  muted={isMuted}
                   playsInline
                   preload="auto"
+                  autoPlay
+                  onCanPlay={() => setVideoReady(true)}
+                  onPlaying={() => setVideoReady(true)}
                   className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-
-               
 
                 {/* Safe Margins */}
                 <div className="absolute inset-6 border border-white/20 border-dashed rounded-sm pointer-events-none opacity-30" />
@@ -209,7 +287,17 @@ export default function Hero({ onScrollToSection }) {
                     00:01:24:12
                   </div>
                   <div className="flex items-center gap-2">
-                    <Volume2 className="w-3 h-3 text-white/70" />
+                    <button
+                      onClick={toggleMute}
+                      className="text-white/70 hover:text-white transition-colors cursor-pointer"
+                      title={isMuted ? "Unmute" : "Mute"}
+                    >
+                      {isMuted ? (
+                        <VolumeX className="w-4 h-4" />
+                      ) : (
+                        <Volume2 className="w-4 h-4" />
+                      )}
+                    </button>
                     <Maximize className="w-3 h-3 text-white/70" />
                   </div>
                 </div>
